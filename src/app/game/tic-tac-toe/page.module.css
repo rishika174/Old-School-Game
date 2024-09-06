@@ -1,0 +1,232 @@
+#bgGrid {
+    position: fixed;
+    will-change: transform;
+    background-size: 2.5rem 2.5rem;
+    background-image: linear-gradient(90deg,rgba(0,0,0,.133) 1px,transparent 0),linear-gradient(180deg,rgba(5,5,5,.133) 1px,transparent 0);
+    z-index: -2
+
+}
+#bgGrid,#blurGrid {
+    inset: 0;
+    height: 100vh;
+}
+#blurGrid {
+    background:radial-gradient(circle,hsla(0,8%,95%,.6) 0,hsla(0,11%,96%,.97) 90%,var(--background) 100%);
+    z-index:-1;
+}
+@media screen and (max-width: 600px) {
+    #bgGrid {
+        background-size:1.5rem 1.5rem
+    }
+}
+
+
+.urlContainer {
+    background-color: var(--light-yellow);
+    padding: 16px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 430px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.urlWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.urlWrapperButton{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.urlText {
+    font-size: 16px;
+    margin-right: 10px;
+    word-break: break-all;
+    width:100%;
+    background-color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    scrollbar-width: none;
+}
+
+.copyButton {
+    min-width: 105px;
+    background-color: #22C55E;
+    color: black;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.copyButton:hover {
+    background-color: var(--green);
+    color: white;
+}
+
+.shareText {
+    font-size: 16px;
+    color: var(--light-red);
+    margin-top: 15px;
+    text-align: center;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.gameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--line-grey);
+    border-right: 1px solid var(--line-grey);
+}
+
+.cell:hover {
+    background-color: var(--light-yellow);
+}
+
+#cell3 ,#cell6, #cell9 {
+    border-right: none;
+}
+#cell7 ,#cell8, #cell9 {
+    border-bottom: none;
+}
+
+
+.gameStatusContainer > p {
+    color: var(--light-green);
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 20px;
+}
+
+
+.resetButtonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.resetButton{
+    background-color: var(--light-green);
+
+    font-size: 16px;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.resetButton:hover{
+    background-color: var(--green);
+}
+
+
+.startGameContainer{
+    background-color: var(--light-yellow);
+    padding: 16px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 430px;
+    margin-top: 2rem;
+}
+
+.createGameButton{
+    background-color: var(--green);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /*gap: 0.5rem;*/
+    width: 100%;
+    max-width: 430px;
+}
+
+.gridButton {
+    /*width: 5rem;*/
+    height: 8rem;
+    background-color: #fff;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    cursor: pointer;
+    border-bottom: 1px solid var(--line-grey);
+    border-right: 1px solid var(--line-grey);
+}
+
+.gridButton:hover {
+    background-color: #f7f7f7;
+}
+
+/* Remove right border for 3rd, 6th, and 9th buttons */
+.gridButton:nth-child(3n) {
+    border-right: none;
+}
+
+/* Remove bottom border for buttons 7, 8, 9 */
+.gridButton:nth-child(n+7) {
+    border-bottom: none;
+}
+
+.timer{
+    color: var(--light-red);
+}
+
+.statusError{
+    color: var(--light-red);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+

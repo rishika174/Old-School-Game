@@ -1,0 +1,521 @@
+"use client";
+
+import styles from "./page.module.css";
+// import { useParams } from 'next/navigation';
+// import { CopyToClipboard } from  'react-copy-to-clipboard'
+import io from 'socket.io-client';
+import { useEffect, useState } from "react";
+
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001');
+
+const TicTacToe = () => {
+    // const { 'game-id': gameId } = useParams();
+    // const { 'cross-nought-symbol': crossNoughtSymbol } = useParams();
+    // const gameURL = gameId ? `https://timepass.web.app/game/tic-tac-toe/${gameId}/${crossNoughtSymbol === 'X' ? 'Y' : 'X'}` : 'error';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // State variables to manage the game state
+
+    const [board, setBoard] = useState(Array(9).fill(null)); // Tic Tac Toe board
+    const [isXNext, setIsXNext] = useState(true); // Determines if 'X' is the next player
+    const [gameNumber, setGameNumber] = useState(''); // Game number for joining games
+    const [currentGame, setCurrentGame] = useState(null); // The current game being played
+    const [status, setStatus] = useState(''); // Status message to display to the user
+    const [mySymbol, setMySymbol] = useState(''); // Player's symbol ('X' or 'O')
+    const [hasStarted, setHasStarted] = useState(false); // Flag to check if the game has started
+
+    // Effect to clear the status message after 5 seconds
+    useEffect(() => {
+        let statusTimer: string | number | NodeJS.Timeout | undefined;
+        if (status) {
+            statusTimer = setTimeout(() => {
+                setStatus('');
+            }, 5000); // 5000 milliseconds = 5 seconds
+        }
+        return () => {
+            clearTimeout(statusTimer); // Clear the timer on cleanup
+        };
+    }, [status]);
+
+    // Effect to handle socket events
+    useEffect(() => {
+        // Handle 'move' event from the server
+        socket.on('move', ({ gameNumber, index, symbol }) => {
+            setBoard(prevBoard => {
+                const newBoard = [...prevBoard]; // Create a new copy of the board
+                newBoard[index] = symbol; // Update the board with the new move
+                setIsXNext(symbol !== 'X'); // Toggle the next player
+                return newBoard;
+            });
+        });
+
+        // Handle 'gameCreated' event from the server
+        socket.on('gameCreated', ({ gameNumber }) => {
+            setCurrentGame(gameNumber); // Set the current game number
+            setStatus(`Game created. Your game number is ${gameNumber}`); // Show the status message
+        });
+
+        // Handle 'gameJoined' event from the server
+        socket.on('gameJoined', ({ gameNumber }) => {
+            setCurrentGame(gameNumber); // Set the current game number
+            setStatus(`Joined game ${gameNumber}`); // Show the status message
+        });
+
+        // Handle 'userJoined' event from the server
+        socket.on('userJoined', ({ userId }) => {
+            setHasStarted(true); // Set the game as started
+            setStatus(`User ${userId} joined the game`); // Show the status message
+        });
+
+        // Handle 'resetGame' event from the server
+        socket.on('resetGame', () => {
+            reset(false); // Reset the game without emitting the reset event
+        });
+
+        // Handle 'error' event from the server
+        socket.on('error', (error) => {
+            setStatus(`Error: ${error}`); // Show the error message
+        });
+
+        // Cleanup socket event listeners on component unmount
+        return () => {
+            socket.off('move');
+            socket.off('gameCreated');
+            socket.off('gameJoined');
+            socket.off('userJoined');
+            socket.off('resetGame');
+            socket.off('error');
+        };
+    }, []);
+
+    // Handle user clicking on a board cell
+    const handleClick = (index: number) => {
+        // If no game is currently being played, show a status message
+        if (!currentGame) {
+            setStatus('Create or join a game first!');
+            return;
+        }
+        // If the game hasn't started yet, show a status message
+        if (!hasStarted) {
+            setStatus('Please wait for opponent to join');
+            return;
+        }
+        // If the cell is already occupied or there is a winner, do nothing
+        if (board[index] || calculateWinner(board)) return;
+        // If it's not the user's turn, show a status message
+        if (isXNext && mySymbol !== 'X') {
+            setStatus('Please wait for opponent\'s move');
+            return;
+        }
+        if (!isXNext && mySymbol === 'X') {
+            setStatus('Please wait for opponent\'s move');
+            return;
+        }
+        const symbol = isXNext ? 'X' : 'O'; // Determine the symbol for the current move
+        socket.emit('move', { gameNumber: currentGame, index, symbol }); // Emit the move to the server
+    };
+
+    // Reset the game board
+    const reset = (isUserInitiated = true) => {
+        setBoard(Array(9).fill(null)); // Clear the board
+        setIsXNext(true); // Set 'X' as the next player
+        if (isUserInitiated) {
+            socket.emit('resetGame', currentGame); // Emit reset event to the server if initiated by the user
+        }
+    };
+
+    // Handle creating a new game
+    const handleCreateGame = () => {
+        setMySymbol('X'); // Set the player's symbol to 'X'
+        console.log("click on crate game")
+        socket.emit('createGame'); // Emit create game event to the server
+    };
+
+    // Handle joining an existing game
+    const handleJoinGame = () => {
+        if (!gameNumber) return; // If no game number is provided, do nothing
+        setMySymbol('O'); // Set the player's symbol to 'O'
+        socket.emit('joinGame', gameNumber); // Emit join game event to the server
+    };
+
+    // Calculate the winner or the game status
+    const winner = calculateWinner(board);
+    const isBoardFull = board.every(cell => cell !== null); // Check if the board is full
+    const gameStatus = winner ? `Winner: ${winner}` : isBoardFull ? 'Tie Match' : `Next player: ${isXNext ? 'X' : 'O'}`;
+
+
+
+
+
+
+
+
+
+
+
+
+    return (
+        <>
+            {/*<div className={styles.urlContainer}>*/}
+            {/*    <div className={styles.urlWrapper}>*/}
+            {/*        <p className={styles.urlText}>{gameURL}</p>*/}
+            {/*        <button className={styles.copyButton}>Copy URL</button>*/}
+            {/*    </div>*/}
+            {/*    <p className={styles.shareText}>Share with your partner to start the game.</p>*/}
+            {/*</div>*/}
+
+
+            <div className={styles.urlContainer}>
+
+                {!currentGame && (
+                    <div>
+
+                    </div>
+
+                    )
+                }
+
+            </div>
+
+
+            <div className="mb-6 text-center">
+
+
+                {!currentGame && (
+                    <div>
+                        <button onClick={handleCreateGame}
+                                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Create Game
+                        </button>
+
+
+                        <div className="mt-4 flex items-center space-x-2">
+                            <input
+                                type="text"
+                                value={gameNumber}
+                                onChange={(e) => setGameNumber(e.target.value)}
+                                placeholder="Enter game number"
+                                className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            />
+                            <button onClick={handleJoinGame}
+                                    className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Join
+                                Game
+                            </button>
+                        </div>
+                    </div>
+
+
+                )}
+
+
+                {currentGame && (
+                    <div className="mt-2 text-lg font-bold text-gray-700 items-center justify-center flex">
+                        {`Game No: ${currentGame}`}
+                        {/*<CopyToClipboard text={currentGame} onCopy={() => setStatus('Game number copied!')}>*/}
+                        {/*    /!*<Image src="/images/copy.png" alt="Copy Game Number" width={15} height={20}*!/*/}
+                        {/*    /!*       className="ml-2 cursor-pointer"/>*!/*/}
+                        {/*</CopyToClipboard>*/}
+                    </div>
+                )}
+
+
+                {(currentGame && gameStatus) && <div className="mt-2 text-lg text-gray-700">{gameStatus}</div>}
+
+
+                {(currentGame && mySymbol) && <div className="mt-2 text-lg text-gray-700">{`You are ${mySymbol}`}</div>}
+
+
+                {status && <div className="mt-2 text-red-500">{status}</div>}
+
+
+            </div>
+
+
+
+            <div className={styles.gameContainer}>
+                <div className={styles.grid}>
+                    <div className={styles.cell} id={styles.cell1} onClick={() => handleClick(0)}></div>
+                    <div className={styles.cell} id={styles.cell2} onClick={() => handleClick(1)}></div>
+                    <div className={styles.cell} id={styles.cell3} onClick={() => handleClick(2)}></div>
+                    <div className={styles.cell} id={styles.cell4} onClick={() => handleClick(3)}></div>
+                    <div className={styles.cell} id={styles.cell5} onClick={() => handleClick(4)}></div>
+                    <div className={styles.cell} id={styles.cell6} onClick={() => handleClick(5)}></div>
+                    <div className={styles.cell} id={styles.cell7} onClick={() => handleClick(6)}></div>
+                    <div className={styles.cell} id={styles.cell8} onClick={() => handleClick(7)}></div>
+                    <div className={styles.cell} id={styles.cell9} onClick={() => handleClick(8)}></div>
+                </div>
+            </div>
+
+
+            <div className="grid grid-cols-3 gap-2">
+                {board.map((cell, index) => (
+                    <button key={index}
+                            className="w-20 h-20 bg-white border border-gray-300 text-xl flex items-center justify-center hover:bg-gray-100"
+                            onClick={() => handleClick(index)}>
+                        {cell}
+                    </button>
+                ))}
+            </div>
+
+
+            {(gameStatus.includes("Winner") || gameStatus.includes('Tie')) && (
+                <button
+                    type="button"
+                    className=""
+                    onClick={() => reset(true)}
+                >
+                    Reset
+                </button>
+            )}
+
+
+        </>
+    );
+};
+
+
+// Helper function to calculate the winner
+const calculateWinner = (board: any[]) => {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a];
+        }
+    }
+    return null;
+};
+
+export default TicTacToe;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// "use client";
+//
+// import styles from "./page.module.css";
+// import {useParams} from 'next/navigation';
+// import io from 'socket.io-client';
+// import {useEffect, useState} from "react"; // Import Socket.io client library
+//
+// // Connect to the Socket.io server using the URL from environment variables or default to localhost
+// const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001');
+//
+//
+// const TicTacToe = () => {
+//     const {'game-id': gameId} = useParams();
+//     const {'cross-nought-symbol': crossNoughtSymbol} = useParams();
+//     const gameURL = gameId && (crossNoughtSymbol === 'X' || crossNoughtSymbol === 'Y')
+//         ? `https://timepass.web.app/game/tic-tac-toe/${gameId}/${crossNoughtSymbol === 'X' ? 'Y' : 'X'}`
+//         : 'error';
+//
+//     const [status, setStatus] = useState('');
+//     // Effect to clear the status message after 5 seconds
+//     useEffect(() => {
+//         let statusTimer: string | number | NodeJS.Timeout | undefined;
+//         if (status) {
+//             statusTimer = setTimeout(() => {
+//                 setStatus('');
+//             }, 5000); // 5000 milliseconds = 5 seconds
+//         }
+//         return () => {
+//             clearTimeout(statusTimer); // Clear the timer on cleanup
+//         };
+//     }, [status]);
+//
+//
+//     console.log(gameId);
+//     console.log(crossNoughtSymbol);
+//
+//
+//     const NoughtSymbol = crossNoughtSymbol === 'Y';
+//     useEffect(() => {
+//         // if (!gameId) return; // If no game number is provided, do nothing
+//         // setMySymbol('O'); // Set the player's symbol to 'O'
+//         socket.emit('joinGame', gameId); // Emit join game event to the server
+//     }, [NoughtSymbol]);
+//
+//
+//     console.log('User Socket ID:', socket.id);
+//
+//
+//     return (
+//         <>
+//             <div className={styles.urlContainer}>
+//                 <div className={styles.urlWrapper}>
+//                     <p className={styles.urlText}>{gameURL}</p>
+//                     <button className={styles.copyButton}>Copy URL</button>
+//                 </div>
+//                 <p className={styles.shareText}>Share with your partner to start the game.</p>
+//             </div>
+//
+//             <div className={styles.gameContainer}>
+//                 <div className={styles.grid}>
+//                     <div className={styles.cell} id={styles.cell1}></div>
+//                     <div className={styles.cell} id={styles.cell2}></div>
+//                     <div className={styles.cell} id={styles.cell3}></div>
+//                     <div className={styles.cell} id={styles.cell4}></div>
+//                     <div className={styles.cell} id={styles.cell5}></div>
+//                     <div className={styles.cell} id={styles.cell6}></div>
+//                     <div className={styles.cell} id={styles.cell7}></div>
+//                     <div className={styles.cell} id={styles.cell8}></div>
+//                     <div className={styles.cell} id={styles.cell9}></div>
+//                 </div>
+//             </div>
+//
+//         </>
+//     );
+// };
+//
+// export default TicTacToe;
