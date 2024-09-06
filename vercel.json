@@ -3,14 +3,25 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/static-build"
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "out"
+      }
+    },
+    {
+      "src": "src/app/server/server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/socket.io/*",
-      "dest": "socket.io.js",
-      "methods": ["GET", "POST", "WebSocket"]
+      "src": "/socket.io/(.*)",
+      "dest": "/src/app/server/server.js",
+      "methods": ["GET", "POST", "OPTIONS"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
