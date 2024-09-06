@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",
     "websocket:dev": "node src/app/server/server.js",
-    "build": "next build",
+    "build": "next build && npm run build:websocket",
     "start": "next start",
-    "lint": "next lint"
+    "start:websocket": "node src/app/server/server.js",
+    "lint": "next lint",
+    "build:websocket": "echo 'Build step for websocket server (if needed)'"
   },
   "dependencies": {
     "next": "14.2.8",
