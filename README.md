@@ -1,6 +1,6 @@
 # Time Pass
 
-Welcome to the **Time Pass** project! This is a simple Tic-Tac-Toe game built with Next.js and Nest.js, featuring real-time multiplayer functionality using Socket.io.
+Welcome to the **Time Pass** project! This is a simple Tic-Tac-Toe game built with Next.js, featuring real-time multiplayer functionality using Socket.io.
 
 ## Project Overview
 
