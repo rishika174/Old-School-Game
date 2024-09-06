@@ -64,6 +64,7 @@ const Game = () => {
 
     useEffect(() => {
         socket.on('move', ({gameNumber, index, symbol}) => {
+            console.log(`Game Number: ${gameNumber}`);
             setBoard(prevBoard => {
                 const newBoard = [...prevBoard];
                 newBoard[index] = symbol;
