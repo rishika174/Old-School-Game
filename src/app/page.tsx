@@ -6,7 +6,7 @@ import TicTacToeImage from "/public/tic-tac-toe.svg";
 import styles from "./page.module.css";
 
 // import { useRouter } from 'next/navigation'; // Import useRouter from Next.js
-import io from 'socket.io-client'; // Import Socket.io client library
+// import io from 'socket.io-client'; // Import Socket.io client library
 // Connect to the Socket.io server using the URL from environment variables or default to localhost
 // const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001');
 
