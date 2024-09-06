@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/socket.io/*",
+      "dest": "socket.io.js",
+      "methods": ["GET", "POST", "WebSocket"]
+    }
+  ]
+}
