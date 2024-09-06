@@ -48,3 +48,6 @@ export default function Home() {
         </header>
     );
 }
+
+
+// "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",

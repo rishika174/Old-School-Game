@@ -6,10 +6,8 @@
   "scripts": {
     "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",
     "websocket:dev": "node src/app/server/server.js",
-    "build": "next build ",
-    "start:websocket": "node src/app/server/server.js",
-    "start": "next start && start:websocket",
-
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {

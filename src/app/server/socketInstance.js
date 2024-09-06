@@ -6,7 +6,7 @@ import { Server } from 'socket.io';
 // Setup CORS and socket server
 export const io = new Server({
     cors: {
-        origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+        origin: process.env.CORS_ORIGIN || "https://timepassgame.vercel.app:3000",
         methods: ["GET", "POST"]
     }
 });
