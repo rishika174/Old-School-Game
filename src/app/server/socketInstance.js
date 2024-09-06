@@ -1,5 +1,7 @@
-import http from 'http';
-import { Server, Socket } from 'socket.io';
+// import http from 'http';
+// import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
+
 
 // Setup CORS and socket server
 export const io = new Server({

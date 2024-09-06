@@ -2,10 +2,9 @@
 
 import {useState, useEffect} from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import Image from 'next/image';
 import io from 'socket.io-client';
 import styles from "./page.module.css";
-import Confetti from "../../../components/ConfettiEffect.jsx";
+// import Confetti from "../../../components/ConfettiEffect.jsx";
 
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001');
 
@@ -24,7 +23,8 @@ const Game = () => {
     const [optionSelected, setOptionSelected] = useState(false);
     const [optionNewGame, setOptionNewGame] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
-    const [isConfettiEffectVisible, setIsConfettiEffectVisible] = useState(false);
+
+    // const [isConfettiEffectVisible, setIsConfettiEffectVisible] = useState(false);
 
 
     // const [seconds, setSeconds] = useState(10);  // Initial 10 seconds for each turn
@@ -258,9 +258,9 @@ const Game = () => {
                     )}
 
 
-                    {isConfettiEffectVisible ? (<Confetti/>) : (' ')}
+                    {/*{isConfettiEffectVisible ? (<Confetti/>) : (' ')}*/}
 
-                    <Confetti/>
+                    {/*<Confetti/>*/}
 
                 </>
                 );

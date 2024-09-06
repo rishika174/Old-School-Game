@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import React, {StrictMode} from 'react';
+import React from 'react';
+// import {StrictMode} from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
