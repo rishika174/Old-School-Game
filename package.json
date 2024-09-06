@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",
     "websocket:dev": "node src/app/server/server.js",
-    "build": "next build",
+    "build": "concurrently \" next build \" \"npm run websocket:dev\"",
     "start": "next start",
     "lint": "next lint"
   },
