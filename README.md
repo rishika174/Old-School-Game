@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Time Pass
 
-## Getting Started
+Welcome to the **Time Pass** project! This is a simple Tic-Tac-Toe game built with Next.js, featuring real-time multiplayer functionality using Socket.io.
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Time Pass** is a fun Tic-Tac-Toe game where you can create or join a game room and play with other users in real-time. The project consists of a frontend built with Next.js and a backend powered by Nest.js with Socket.io for real-time communication.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend (Next.js)**
+  - `src/app/game/tic-tac-toe/page.tsx`: Main game logic and UI
+  - `src/app/page.tsx`: Home page with game start link
 
-## Learn More
+- **Backend**
+  - `src/app/server/server.js`: Entry point for the WebSocket server
+  - `src/app/server/socketInstance.js`: Socket.io server configuration and game logic
 
-To learn more about Next.js, take a look at the following resources:
+### How to Play
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Create a Game**: Click the "Create Game" button on the home page to create a new game room. Share the game number with your friend.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Join a Game**: Enter the game number provided by your friend and click "Join Game" to join their game room.
 
-## Deploy on Vercel
+3. **Start Playing**: Once in the game room, make your moves by clicking on the board. The game updates in real-time for both players.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Feel free to fork the repository and submit pull requests. If you encounter any issues or have suggestions, please create an [issue](https://github.com/ajaynegi45/Time-Pass/issues).
+
+
+Enjoy playing Tic-Tac-Toe and contributing to the project!
+
