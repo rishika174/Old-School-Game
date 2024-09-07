@@ -126,3 +126,64 @@
         border-right: 1px solid var(--line-grey);
     }
 }
+
+
+
+
+
+
+
+
+
+.workingContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;;
+    justify-content: center;
+    margin-top: 10rem;
+    text-align: left;
+
+}
+
+.workingContainer div {
+    width: 95%;
+}
+
+.workingContainer h2 {
+    margin-bottom: 10px;
+    text-align: left;
+    color: var(--green);
+
+}
+
+.workingContainer  h3 {
+    margin-top: 2rem;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.ulContainer {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.ulContainer li {
+    margin-top: 7px;
+    text-align: left;
+}
+
+.youtubeLinkContainer{
+    margin-top: 2rem;
+}
+
+.youtubeLink {
+    padding: 8px 12px;
+    border-radius: 5px;
+
+    background-color: var(--light-yellow);
+}
+
+.youtubeLink:hover {
+    background-color: var(--light-yellow);
+}

@@ -18,7 +18,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Time Pass",
+  title: "Brain Game",
   description: "Unlock Your Mind's Potential",
 };
 

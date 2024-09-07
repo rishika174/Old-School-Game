@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getBestMove } from "./HardMinimax"; // Import the getBestMove function from the HardMinimax module to get the best move for the AI
 import styles from "./gameBoard.module.css";
+import Link from "next/link";
 
 // Define the type for the props that the GameBoard component will receive
 type GameBoardProps = {
@@ -89,37 +90,91 @@ export default function GameBoard({ playerSymbol }: GameBoardProps) {
     const winner = checkWin(board);
     const draw = isDraw(board);
 
-    return (
-        <div className={styles.boardContainer}>
-            {/* Display the game status */}
-            {currentTurn === computerSymbol ? (<h1 className={styles.turnStatus}>{gameStatus}</h1>): (<h1>{gameStatus}</h1>)}
+    return (<>
 
-            <div className={styles.board}>
-                {/* Render each cell as a button */}
-                {board.map((cell, index) => (
-                    <button
-                        className={styles.gridButton}
-                        key={index}
-                        onClick={() => handleClick(index)}
-                        disabled={currentTurn === computerSymbol || cell !== null} // Disable button if it's the computer's turn or cell is filled
-                    >
-                        {cell} {/* Display the cell content ("X", "O", or empty) */}
-                    </button>
-                ))}
+            <div className={styles.boardContainer}>
+                {/* Display the game status */}
+                {currentTurn === computerSymbol ? (<h1 className={styles.turnStatus}>{gameStatus}</h1>) : (
+                    <h1>{gameStatus}</h1>)}
+
+                <div className={styles.board}>
+                    {/* Render each cell as a button */}
+                    {board.map((cell, index) => (
+                        <button
+                            className={styles.gridButton}
+                            key={index}
+                            onClick={() => handleClick(index)}
+                            disabled={currentTurn === computerSymbol || cell !== null} // Disable button if it's the computer's turn or cell is filled
+                        >
+                            {cell} {/* Display the cell content ("X", "O", or empty) */}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Show reset button and result message if the game is over */}
+                {(winner || draw) && (
+                    <div className={styles.resetButtonContainer}>
+                        {winner &&
+                            <h2 className={styles.winMessage}>{winner === computerSymbol ? "You lose the game 😞" : "You win! 🎉"}</h2>}
+                        {draw && !winner && <h2 className={styles.winMessage}>It&apos;s a draw!</h2>}
+
+                        {/* Button to reset the game */}
+                        <button type="button" className={styles.resetButton} onClick={reset}>
+                            Reset
+                        </button>
+                    </div>
+                )}
             </div>
 
-            {/* Show reset button and result message if the game is over */}
-            {(winner || draw) && (
-                <div className={styles.resetButtonContainer}>
-                    {winner && <h2 className={styles.winMessage}>{winner === computerSymbol ? "You lose the game 😞" : "You win! 🎉"}</h2>}
-                    {draw && !winner && <h2 className={styles.winMessage}>It&apos;s a draw!</h2>}
 
-                    {/* Button to reset the game */}
-                    <button type="button" className={styles.resetButton} onClick={reset}>
-                        Reset
-                    </button>
+
+            <div className={styles.workingContainer}>
+
+                <div>
+                    <h2>How Does the Computer Pick the Best Move?</h2>
+                    <p>The computer looks at the current board state, checks every empty cell, and evaluates what would
+                        happen if it places its symbol (X or O) there.</p>
                 </div>
-            )}
-        </div>
+
+                <div>
+                    <h3>Minimax Algorithm</h3>
+                    <p>The AI uses an algorithm called Minimax, which simulates every possible move. It tries to find
+                        the move that will either help it win or force a draw.</p>
+                </div>
+
+                <div>
+                    <h3>Scoring System</h3>
+                    <p>Every time the AI places a symbol, it checks if it would lead to a win, loss, or draw:</p>
+                    <ul className={styles.ulContainer}>
+                        <li>AI Wins: +10 points</li>
+                        <li>Player Wins: -10 points</li>
+                        <li>Draw: 0
+                            points</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Alpha-Beta Pruning</h3>
+                    <p>The AI also uses Alpha-Beta Pruning to make the calculations faster by &quot;cutting
+                        off&quot; moves that
+                        don&apos;t
+                        need to be evaluated fully. This reduces the number of possible outcomes the computer has to
+                        consider.</p>
+                    <br/>
+                    <ul className={styles.ulContainer}>
+                        <li>Alpha represents the best value the computer can achieve.</li>
+                        <li>Beta represents the worst value the player can force the computer into.</li>
+                    </ul>
+                    <br/>
+                    <p>Whenever the computer detects that a move is worse than one already evaluated, it stops considering that branch of the decision tree.</p>
+                </div>
+
+                <div className={styles.youtubeLinkContainer}>
+                    <Link className={styles.youtubeLink} href="https://youtu.be/STjW3eH0Cik?feature=shared" target="_blank" rel="noopener noreferrer" >Learn more about it</Link>
+                </div>
+
+            </div>
+
+        </>
     );
 }
