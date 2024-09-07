@@ -13,17 +13,26 @@ export default function Home() {
     };
 
     return (
-        <div style={{ textAlign: "center" }}>
+        <div style={{textAlign: "center"}}>
             {!playerSymbol ? (
-                <div className={styles.selectSymbolContainer} >
-                    <h2>Select your symbol</h2>
-                    <div className={styles.symbolContainer}>
-                        <button className={styles.selectSymbolButton1} onClick={() => handleSymbolSelect("X")}>X</button>
-                        <button className={styles.selectSymbolButton2} onClick={() => handleSymbolSelect("O")}>O</button>
+                <>
+
+                    <div id={styles.bgGrid}>
+                        <div id={styles.blurGrid}></div>
                     </div>
-                </div>
+
+                    <div className={styles.selectSymbolContainer}>
+                        <h2>Select your symbol</h2>
+                        <div className={styles.symbolContainer}>
+                            <button className={styles.selectSymbolButton1} onClick={() => handleSymbolSelect("X")}>X
+                            </button>
+                            <button className={styles.selectSymbolButton2} onClick={() => handleSymbolSelect("O")}>O
+                            </button>
+                        </div>
+                    </div>
+                </>
             ) : (
-                <GameBoard playerSymbol={playerSymbol} />
+                <GameBoard playerSymbol={playerSymbol}/>
             )}
         </div>
     );

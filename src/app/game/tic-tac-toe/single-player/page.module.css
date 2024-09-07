@@ -46,3 +46,25 @@
     background-color: #f0f0f0;
 }
 
+
+#bgGrid {
+    position: fixed;
+    will-change: transform;
+    background-size: 2.5rem 2.5rem;
+    background-image: linear-gradient(90deg,rgba(0,0,0,.133) 1px,transparent 0),linear-gradient(180deg,rgba(5,5,5,.133) 1px,transparent 0);
+    z-index: -2
+
+}
+#bgGrid,#blurGrid {
+    inset: 0;
+    height: 100vh;
+}
+#blurGrid {
+    background:radial-gradient(circle,hsla(0,8%,95%,.6) 0,hsla(0,11%,96%,.97) 90%,var(--background) 100%);
+    z-index:-1;
+}
+@media screen and (max-width: 600px) {
+    #bgGrid {
+        background-size:1.5rem 1.5rem
+    }
+}
