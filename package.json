@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",
+    "dev": "next dev ",
     "websocket:dev": "node src/app/server/server.js",
     "build": "next build",
     "start": "next start",

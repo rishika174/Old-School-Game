@@ -42,7 +42,7 @@ export default function Home() {
                         {/*<Link href="/game/tic-tac-toe">Start Game</Link>*/}
                     </div>
                     <div className={styles.githubUrlConatiner}>
-                        <Link href="https://github.com/ajaynegi45">See Github</Link>
+                        <Link href="https://github.com/ajaynegi45/Time-Pass">See Github</Link>
                     </div>
                 </div>
             </div>
