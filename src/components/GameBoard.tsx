@@ -82,7 +82,7 @@ export default function GameBoard({ playerSymbol }: GameBoardProps) {
             {(winner || draw) && (
                 <div className={styles.resetButtonContainer}>
                     {winner && <h2 className={styles.winMessage}>{winner === computerSymbol ? "You lose the game 😞" : "You win! 🎉"}</h2>}
-                    {draw && !winner && <h2 className={styles.winMessage}>It's a draw!</h2>}
+                    {draw && !winner && <h2 className={styles.winMessage}>It&apos;s a draw!</h2>}
 
                     <button type="button" className={styles.resetButton} onClick={reset}>
                         Reset
