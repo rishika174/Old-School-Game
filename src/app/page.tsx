@@ -38,7 +38,8 @@ export default function Home() {
                 <div className={styles.urlConatiner}>
                     <div className={styles.tictactoeUrlConatiner}>
                         {/*<button className={styles.tictactoeButton} onClick={handleCreateGame}>Start Game</button>*/}
-                        <Link href="/game/tic-tac-toe">Start Game</Link>
+                        <Link href="/game/tic-tac-toe/single-player">Start Game</Link>
+                        {/*<Link href="/game/tic-tac-toe">Start Game</Link>*/}
                     </div>
                     <div className={styles.githubUrlConatiner}>
                         <Link href="https://github.com/ajaynegi45">See Github</Link>

@@ -1,0 +1,118 @@
+.boardContainer{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+
+}
+.boardContainer > h1 {
+    font-size: 20px;
+    color: var(--black);
+    margin-bottom: 2rem;
+}
+
+.board{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    max-width: 430px;
+}
+
+
+
+.gridButton{
+    width: 100%;
+    min-width: 100px;
+    height: 8rem;
+    background-color: #fff;
+    color: var(--light-green);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    cursor: pointer;
+    border-bottom: 1px solid var(--line-grey);
+    border-right: 1px solid var(--line-grey);
+}
+
+/* Remove right border for 3rd, 6th, and 9th buttons */
+.gridButton:nth-child(3n) {
+    border-right: none;
+}
+
+/* Remove bottom border for buttons 7, 8, 9 */
+.gridButton:nth-child(n+7) {
+    border-bottom: none;
+}
+
+/*.boardContainer > h2 {*/
+/*    color: var(--light-red);*/
+/*    margin-top: 1rem;*/
+/*}*/
+
+.winMessage{
+    color: var(--light-red);
+    margin-top: 1rem;
+
+    filter: drop-shadow(0 0 0.40rem #A0A5AC);
+
+}
+.winningCell {
+    background-color: yellow;
+    color: red;
+    font-weight: bold;
+}
+
+
+.resetButtonContainer{
+    position: absolute;
+    backdrop-filter: blur(1.5px);
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.resetButton{
+    background-color: var(--light-yellow);
+
+    font-size: 16px;
+    color: var(--black);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.resetButton:hover{
+    background-color: var(--green);
+    color: white;
+}
+
+@media (max-width: 375px) {
+    .boardContainer{
+        margin-top: 0;
+    }
+
+
+    .gridButton{
+        height: 7rem;
+        background-color: #fff;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+
+        cursor: pointer;
+        border-bottom: 1px solid var(--line-grey);
+        border-right: 1px solid var(--line-grey);
+    }
+}

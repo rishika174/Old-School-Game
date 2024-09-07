@@ -1,3 +1,16 @@
+    "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 
 import styles from "./page.module.css";

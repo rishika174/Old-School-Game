@@ -6,7 +6,9 @@ import io from 'socket.io-client';
 import styles from "./page.module.css";
 // import Confetti from "../../../components/ConfettiEffect.jsx";
 
-const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'https://timepassgame.vercel.app:3001'); // 'http://localhost:3001' set this for development
+
+// https://timepassgame.vercel.app
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001'); // 'http://localhost:3001' set this for development
 
 const Game = () => {
 
