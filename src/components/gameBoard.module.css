@@ -8,11 +8,21 @@
     margin-top: 5rem;
 
 }
+
+.boardContainer > .turnStatus{
+    font-size: 20px;
+    color: var(--light-red);
+    margin-bottom: 2rem;
+}
+
 .boardContainer > h1 {
     font-size: 20px;
     color: var(--black);
     margin-bottom: 2rem;
 }
+
+
+
 
 .board{
     display: grid;
