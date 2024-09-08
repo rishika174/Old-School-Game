@@ -21,6 +21,22 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Old School Game",
   description: "Unlock Your Mind's Potential",
+  openGraph:{
+    type: "website",
+    url: "https://oldschoolgame.vercel.app/",
+    title: "Old School Game",
+    description: "Unlock Your Mind's Potential",
+    siteName: "Old School Game",
+    images: [{   url: "/oldschoolgame.webp",   }],
+  },
+  twitter:{
+    card: "summary_large_image",
+    site: "https://oldschoolgame.vercel.app/",
+    creator: "Old School Game",
+    description:"Unlock Your Mind's Potential",
+    images: "/oldschoolgame.webp"
+  }
+
 };
 
 export default function RootLayout( {
@@ -33,19 +49,19 @@ export default function RootLayout( {
 
     return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <body className={`${geistSans.variable} ${geistMono.variable}`}>
 
-      {/*<StrictMode>*/}
-        <main>
-          <Navbar/>
+    {/*<StrictMode>*/}
+    <main>
+      <Navbar/>
 
-          {children}
+      {children}
 
-          <Footer/>
-        </main>
-      {/*</StrictMode>*/}
+      <Footer/>
+    </main>
+    {/*</StrictMode>*/}
 
-      </body>
+    </body>
     </html>
     );
 }
