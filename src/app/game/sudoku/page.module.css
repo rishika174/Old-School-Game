@@ -1,0 +1,143 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.grid {
+    border-collapse: collapse;
+    margin: 20px;
+
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid black;
+
+}
+
+.cell {
+    /*width: 100%;*/
+    height: 45px;
+    aspect-ratio: 1 / 1;
+    text-align: center;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+
+
+
+
+
+/* Apply thick borders for the 3x3 subgrid boundaries */
+/* Every 3rd column and row gets an extra border */
+
+.cell:nth-child(3n+1) {
+    border-left: 2px solid black;
+}
+
+.cell:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+tr:nth-child(3n+1) .cell {
+    border-top: 2px solid black;
+}
+
+tr:nth-child(3n) .cell {
+    border-bottom: 2px solid black;
+}
+
+
+.unchangeable {
+    color: black;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+.changeable{
+    color: var(--light-red);
+}
+
+.numberSelect {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.numberButton {
+    width: 100%;
+    height: 40px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+.numberButton:hover{
+    background-color: var(--light-yellow);
+    color: var(--black);
+    cursor: pointer;
+}
+.numberButton:active{
+    background-color: var(--green);
+    color: white;
+
+}
+
+.difficultyContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+.difficultyContainer > button {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--light-yellow);
+    color: var(--black);
+    font-size: 14px;
+}
+.difficultyContainer > button:hover {
+    background-color: var(--light-green);
+    cursor: pointer;
+}
+
+.checkYourSolutionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+.checkYourSolutionContainer > p {
+    color: var(--light-red);
+}
+.checkYourSolutionContainer > button {
+    /*margin-top: 1rem;*/
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--light-green);
+    color: var(--black);
+    font-size: 14px;
+}
+.checkYourSolutionContainer > button:hover {
+    background-color: var(--green);
+    color: white;
+    cursor: pointer;
+}
+
+
+.rules {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.rules p {
+    margin-top: 1rem;
+}
+

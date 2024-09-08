@@ -4,7 +4,7 @@ import {useState} from "react";
 import GameBoard from '../../../../components/GameBoard';
 import styles from "./page.module.css";
 
-export default function Home() {
+export default function SinglePlayerPage() {
     const [playerSymbol, setPlayerSymbol] = useState<"X" | "O" | null>(null);
 
 
