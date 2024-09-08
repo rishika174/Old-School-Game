@@ -3,29 +3,22 @@ import { getBestMove } from "./HardMinimax"; // Import the getBestMove function 
 import styles from "./gameBoard.module.css";
 import Link from "next/link";
 
-// Define the type for the props that the GameBoard component will receive
-type GameBoardProps = {
+type GameBoardProps = { // Define the type for the props that the GameBoard component will receive
     playerSymbol: "X" | "O"; // The symbol used by the player ("X" or "O")
 };
 
-// Define the initial state of the board with 9 null values representing an empty board
-const initialBoard = Array(9).fill(null);
+const initialBoard = Array(9).fill(null); // Define the initial state of the board with 9 null values representing an empty board
 
 export default function GameBoard({ playerSymbol }: GameBoardProps) {
-    // State to keep track of the current board state
-    const [board, setBoard] = useState<(null | "X" | "O")[]>(initialBoard);
+    const [board, setBoard] = useState<(null | "X" | "O")[]>(initialBoard); // State to keep track of the current board state
+    const [currentTurn, setCurrentTurn] = useState<"X" | "O">(playerSymbol); // State to keep track of whose turn it is ("X" or "O")
+    const [gameStatus, setGameStatus] = useState<string>("Start playing your game"); // State to display the game status (e.g., instructions or result)
+    const computerSymbol = playerSymbol === "X" ? "O" : "X"; // Determine the computer's symbol based on the player's symbol
 
-    // State to keep track of whose turn it is ("X" or "O")
-    const [currentTurn, setCurrentTurn] = useState<"X" | "O">(playerSymbol);
-
-    // Determine the computer's symbol based on the player's symbol
-    const computerSymbol = playerSymbol === "X" ? "O" : "X";
-
-    // State to display the game status (e.g., instructions or result)
-    const [gameStatus, setGameStatus] = useState<string>("Start playing your game");
 
     // Function to check if there is a winner on the board
     const checkWin = (board: (null | "X" | "O")[]) => {
+
         // Define the winning patterns for rows, columns, and diagonals
         const winPatterns = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],  // Rows
@@ -36,8 +29,10 @@ export default function GameBoard({ playerSymbol }: GameBoardProps) {
         // Check each winning pattern
         for (const pattern of winPatterns) {
             const [a, b, c] = pattern;
+
             // If all three cells in the pattern are the same and not null, return the symbol
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                console.log(board[a]);
                 return board[a];
             }
         }

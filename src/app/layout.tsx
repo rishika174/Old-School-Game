@@ -11,6 +11,7 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -18,27 +19,34 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Brain Game",
+  title: "Old School Game",
   description: "Unlock Your Mind's Potential",
 };
 
-export default function RootLayout({
+export default function RootLayout( {
   children,
-}: Readonly<{
+}: Readonly <{
   children: React.ReactNode;
-}>) {
+}> ) {
+
   console.log("Reloaded Layout Page...")
+
     return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+
       {/*<StrictMode>*/}
         <main>
           <Navbar/>
+
           {children}
+
           <Footer/>
         </main>
       {/*</StrictMode>*/}
+
       </body>
     </html>
     );
 }
+

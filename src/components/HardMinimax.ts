@@ -1,5 +1,4 @@
-// Type definition for the Tic-Tac-Toe board
-type Board = (null | "X" | "O")[];
+type Board = (null | "X" | "O") []; // Type definition for the Tic-Tac-Toe board
 
 /**
  * The `hardMinimax` function implements the minimax algorithm with alpha-beta pruning.
@@ -10,6 +9,7 @@ type Board = (null | "X" | "O")[];
  * @param isMaximizing - A boolean value that indicates if the current player is the maximizing player (true) or minimizing player (false).
  * @param alpha - The best value that the maximizing player can guarantee at that level or above.
  * @param beta - The best value that the minimizing player can guarantee at that level or below.
+ * @param computerSymbol - The symbol of the computer player ("X" or "O").
  * @returns The best score for the current move.
  */
 export const hardMinimax = (
@@ -17,22 +17,23 @@ export const hardMinimax = (
     depth: number,
     isMaximizing: boolean,
     alpha: number,
-    beta: number
+    beta: number,
+    computerSymbol: "X" | "O" // Symbol for the computer player
 ): number => {
-    const human = "O"; // Symbol for the human player
-    const computer = "X"; // Symbol for the computer player
+    const human = computerSymbol === 'X' ? 'O' : 'X';
+    console.log('Computer Symbol in Hard Minimax: ', computerSymbol);
 
     // Check if there's a winner or if the game is a tie
     const winner = checkWin(board);
-    if (winner === computer) return 10 - depth; // If computer wins, return a high score
+    if (winner === computerSymbol) return 10 - depth; // If computer wins, return a high score
     if (winner === human) return depth - 10; // If human wins, return a low score
     if (emptyIndices(board).length === 0) return 0; // If the board is full and no winner, return 0 (draw)
 
     if (isMaximizing) { // If it's the computer's turn (maximizing player)
         let maxEval = -Infinity; // Initialize the best score as very low
         for (const index of emptyIndices(board)) { // Iterate over all empty cells
-            board[index] = computer; // Try placing the computer's move at the current empty cell
-            const evalScore = hardMinimax(board, depth + 1, false, alpha, beta); // Evaluate the score for this move
+            board[index] = computerSymbol; // Try placing the computer's move at the current empty cell
+            const evalScore = hardMinimax(board, depth + 1, false, alpha, beta, computerSymbol); // Evaluate the score for this move
             board[index] = null; // Undo the move
             maxEval = Math.max(maxEval, evalScore); // Update the best score if this move is better
             alpha = Math.max(alpha, evalScore); // Update alpha to the maximum value found
@@ -43,7 +44,7 @@ export const hardMinimax = (
         let minEval = Infinity; // Initialize the best score as very high
         for (const index of emptyIndices(board)) { // Iterate over all empty cells
             board[index] = human; // Try placing the human's move at the current empty cell
-            const evalScore = hardMinimax(board, depth + 1, true, alpha, beta); // Evaluate the score for this move
+            const evalScore = hardMinimax(board, depth + 1, true, alpha, beta,computerSymbol); // Evaluate the score for this move
             board[index] = null; // Undo the move
             minEval = Math.min(minEval, evalScore); // Update the best score if this move is better
             beta = Math.min(beta, evalScore); // Update beta to the minimum value found
@@ -57,18 +58,17 @@ export const hardMinimax = (
  * The `getBestMove` function determines the best move for the computer player.
  *
  * @param board - The current state of the board.
- * @param playerSymbol - The symbol of the computer player ("X" or "O").
+ * @param computerSymbol - The symbol of the computer player ("X" or "O").
  * @returns The index of the best move that the computer should make.
  */
-export const getBestMove = (board: Board, playerSymbol: "X" | "O"): number => {
+export const getBestMove = (board: Board, computerSymbol: "X" | "O"): number => {
     let bestMove = -1; // Initialize the best move index
     let bestScore = -Infinity; // Initialize the best score as very low
-    const computer = playerSymbol === "X" ? "O" : "X"; // Determine the computer's symbol based on the player's symbol
 
     // Iterate over all empty cells to find the best move
     for (const index of emptyIndices(board)) {
-        board[index] = computer; // Try placing the computer's move at the current empty cell
-        const moveScore = hardMinimax(board, 0, false, -Infinity, Infinity); // Evaluate the move using minimax
+        board[index] = computerSymbol; // Try placing the computer's move at the current empty cell
+        const moveScore = hardMinimax(board, 0, false, -Infinity, Infinity, computerSymbol); // Evaluate the move using minimax
         board[index] = null; // Undo the move
         if (moveScore > bestScore) { // Update the best move if this move has a better score
             bestScore = moveScore;
@@ -79,6 +79,7 @@ export const getBestMove = (board: Board, playerSymbol: "X" | "O"): number => {
     return bestMove; // Return the index of the best move
 };
 
+
 /**
  * Helper function to find the indices of empty spots on the board.
  *
@@ -86,9 +87,15 @@ export const getBestMove = (board: Board, playerSymbol: "X" | "O"): number => {
  * @returns An array of indices where the board is empty.
  */
 const emptyIndices = (board: Board) => {
-    // Create an array of indices where the board cells are empty (null)
-    return board.map((value, index) => (value === null ? index : null)).filter((val) => val !== null) as number[];
+    return board.map( // Create an array of indices where the board cells are empty (null)
+        (value, index) => (
+            value === null ? index : null)
+    ).filter(
+            (val) =>
+                val !== null
+    ) as number[];
 };
+
 
 /**
  * The `checkWin` function checks if there is a winner on the board.
