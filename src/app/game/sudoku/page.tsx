@@ -24,13 +24,7 @@ export default function Home() {
             return filteredArr.length === uniqueNumbers.size && filteredArr.length === 9;
         };
 
-        // // Check all rows
-        // for (let row = 0; row < 9; row++) {
-        //     if (!isValidArray(sudoku[row])) {
-        //         setMessage(`Invalid solution! Check your rows ${1+row}. 🧐`);
-        //         return false;
-        //     }
-        // }
+
         //
         // // Check all columns
         // for (let col = 0; col < 9; col++) {
@@ -54,6 +48,14 @@ export default function Home() {
                     setMessage(`Invalid solution! Check your ${1+gridRow}x${1+gridCol} grids. 🤔`);
                     return false;
                 }
+            }
+        }
+
+        // Check all rows
+        for (let row = 0; row < 9; row++) {
+            if (!isValidArray(sudoku[row])) {
+                setMessage(`Invalid solution! Check your rows ${1+row}. 🧐`);
+                return false;
             }
         }
 
