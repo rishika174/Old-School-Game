@@ -25,40 +25,40 @@ export default function Home() {
         };
 
 
-        //
-        // // Check all columns
-        // for (let col = 0; col < 9; col++) {
-        //     const column = sudoku.map(row => row[col]);
-        //     if (!isValidArray(column)) {
-        //         setMessage(`Invalid solution! Check your columns ${1+col}. 🧐`);
-        //         return false;
-        //     }
-        // }
 
-        // Check all 3x3 grids
-        for (let gridRow = 0; gridRow < 3; gridRow++) {
-            for (let gridCol = 0; gridCol < 3; gridCol++) {
-                const grid: number[] = [];
-                for (let row = gridRow * 3; row < gridRow * 3 + 3; row++) {
-                    for (let col = gridCol * 3; col < gridCol * 3 + 3; col++) {
-                        grid.push(sudoku[row][col]);
-                    }
-                }
-                if (!isValidArray(grid)) {
-                    setMessage(`Invalid solution! Check your ${1+gridRow}x${1+gridCol} grids. 🤔`);
-                    return false;
-                }
-            }
-        }
 
-        // Check all rows
-        for (let row = 0; row < 9; row++) {
-            if (!isValidArray(sudoku[row])) {
-                setMessage(`Invalid solution! Check your rows ${1+row}. 🧐`);
+        // Check all columns
+        for (let col = 0; col < 9; col++) {
+            const column = sudoku.map(row => row[col]);
+            if (!isValidArray(column)) {
+                setMessage(`Invalid solution! Check your column ${1+col} `);
                 return false;
             }
         }
 
+        // // Check all 3x3 grids
+        // for (let gridRow = 0; gridRow < 3; gridRow++) {
+        //     for (let gridCol = 0; gridCol < 3; gridCol++) {
+        //         const grid: number[] = [];
+        //         for (let row = gridRow * 3; row < gridRow * 3 + 3; row++) {
+        //             for (let col = gridCol * 3; col < gridCol * 3 + 3; col++) {
+        //                 grid.push(sudoku[row][col]);
+        //             }
+        //         }
+        //         if (!isValidArray(grid)) {
+        //             setMessage(`Invalid solution! Check your ${1+gridRow}x${1+gridCol} grids. 🤔`);
+        //             return false;
+        //         }
+        //     }
+        // }
+
+        // Check all rows
+        for (let row = 0; row < 9; row++) {
+            if (!isValidArray(sudoku[row])) {
+                setMessage(`Invalid solution! Check your row ${1+row}. 🧐`);
+                return false;
+            }
+        }
         setMessage("Congratulations! Your solution is correct. 🥰");
         return true;
     };
@@ -191,103 +191,117 @@ export default function Home() {
 
 
 
-
-// Function to check if a number is valid in a given position
+// Function to check if a number is valid in a given position on the Sudoku grid
 const isValid = (grid: number[][], row: number, col: number, num: number) => {
     for (let i = 0; i < 9; i++) {
-        // Check if the number already exists in the row, column, or 3x3 grid
+        // Check if the number exists in the same row or column
         if (grid[row][i] === num || grid[i][col] === num) return false;
 
-        // Check the 3x3 grid
+        // Calculate the start of the 3x3 grid the number should belong to
         const gridRow = 3 * Math.floor(row / 3) + Math.floor(i / 3);
         const gridCol = 3 * Math.floor(col / 3) + (i % 3);
+
+        // Check if the number already exists in the corresponding 3x3 grid
         if (grid[gridRow][gridCol] === num) return false;
     }
-    return true;
+    return true; // The number is valid in the given position
 };
 
-// Function to generate a full valid Sudoku grid using backtracking
+// Function to generate a fully valid Sudoku grid using backtracking
 const generateFullGrid = () => {
+    // Create a 9x9 grid filled with 0s (empty cells)
     const grid = Array.from({ length: 9 }, () => Array(9).fill(0));
 
-    // Function to fill the grid using backtracking
+    // Recursive function to fill the grid using backtracking
     const fillGrid = (grid: number[][]): boolean => {
         for (let row = 0; row < 9; row++) {
+
             for (let col = 0; col < 9; col++) {
+                // If the current cell is empty (0), try to place a valid number
                 if (grid[row][col] === 0) {
-                    // Shuffle numbers 1-9 to place them randomly
+                    // Create an array of numbers 1-9 and shuffle them randomly
                     const nums = Array.from({ length: 9 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+                    // Try each number in the shuffled array
                     for (const num of nums) {
+                        // Check if the number is valid in the current position
                         if (isValid(grid, row, col, num)) {
-                            grid[row][col] = num;
+                            grid[row][col] = num; // Place the number
+                            // Recursively attempt to fill the next cell
                             if (fillGrid(grid)) return true;
-                            grid[row][col] = 0; // Backtrack
+                            grid[row][col] = 0; // Backtrack if placing the number didn't work
                         }
                     }
                     return false; // No valid number found, backtrack
                 }
             }
         }
-        return true; // Grid fully filled
+        return true; // Grid fully filled successfully
     };
 
-
-    fillGrid(grid);
-    return grid;
+    fillGrid(grid); // Start filling the grid
+    return grid; // Return the generated Sudoku grid
 };
 
-// Function to remove numbers to create a Sudoku puzzle with a specific difficulty
+// Function to remove numbers from the filled grid to create a Sudoku puzzle
+// Difficulty can be "easy", "medium", or "hard"
 const removeNumbers = (grid: number[][], difficulty: "easy" | "medium" | "hard") => {
+    // Set the number of removal attempts based on the difficulty level
     let attempts = difficulty === "easy" ? 30 : difficulty === "medium" ? 40 : 50;
 
+    // Remove numbers from the grid until the number of attempts is reached
     while (attempts > 0) {
-        const row = Math.floor(Math.random() * 9);
-        const col = Math.floor(Math.random() * 9);
+        const row = Math.floor(Math.random() * 9); // Pick a random row
+        const col = Math.floor(Math.random() * 9); // Pick a random column
 
+        // If the cell is not already empty
         if (grid[row][col] !== 0) {
-            const backup = grid[row][col];
-            grid[row][col] = 0;
+            const backup = grid[row][col]; // Backup the number in the cell
+            grid[row][col] = 0; // Remove the number (set to 0)
 
+            // Create a deep copy of the grid to test if the puzzle still has a unique solution
             const gridCopy = grid.map(row => [...row]);
 
-            // If the puzzle still has a unique solution, continue; otherwise, restore the number
+            // If the puzzle has multiple solutions, restore the removed number
             if (!hasUniqueSolution(gridCopy)) {
-                grid[row][col] = backup; // Restore the number if multiple solutions found
+                grid[row][col] = backup; // Restore the removed number
             } else {
-                attempts--;
+                attempts--; // Decrease the number of attempts left
             }
         }
     }
 
-    return grid;
+    return grid; // Return the grid with numbers removed
 };
 
-// Function to check if the Sudoku has a unique solution (basic backtracking solver)
+// Function to check if the Sudoku puzzle has a unique solution
 const hasUniqueSolution = (grid: number[][]) => {
-    let solutionCount = 0;
+    let solutionCount = 0; // Initialize solution count
 
+    // Recursive function to solve the grid using backtracking
     const solve = (grid: number[][]): boolean => {
         for (let row = 0; row < 9; row++) {
             for (let col = 0; col < 9; col++) {
+                // If the current cell is empty (0), try placing numbers 1-9
                 if (grid[row][col] === 0) {
                     for (let num = 1; num <= 9; num++) {
+                        // Check if the number is valid in the current position
                         if (isValid(grid, row, col, num)) {
-                            grid[row][col] = num;
+                            grid[row][col] = num; // Place the number
                             if (solve(grid)) {
-                                solutionCount++;
-                                if (solutionCount > 1) return false; // More than one solution
+                                solutionCount++; // Increase the solution count if a solution is found
+                                if (solutionCount > 1) return false; // If more than one solution, stop
                             }
-                            grid[row][col] = 0;
+                            grid[row][col] = 0; // Backtrack if needed
                         }
                     }
-                    return false; // No solution found
+                    return false; // No valid number found, backtrack
                 }
             }
         }
         return true; // Solution found
     };
 
-    solve(grid);
-    return solutionCount === 1;
+    solve(grid); // Start solving the grid
+    return solutionCount === 1; // Return true if only one solution exists
 };
 
