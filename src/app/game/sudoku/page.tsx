@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import styles from "./page.module.css";
 import { generateFullSudoku, removeNumbers } from "@/app/game/sudoku/Sudoku";
 
