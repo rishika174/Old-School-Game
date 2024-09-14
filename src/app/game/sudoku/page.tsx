@@ -150,6 +150,8 @@ export default function Home() {
                     </p>
                 </div>
 
+
+
                 <table className={styles.grid}>
                     <tbody>
                     {sudoku.map((row, rowIndex) => (
@@ -161,7 +163,7 @@ export default function Home() {
                 </table>
 
                 <div className={styles.numberSelect}>
-                    {Array.from({ length: 9 }, (_, i) => i + 1).map((number) => (
+                    {Array.from({length: 9}, (_, i) => i + 1).map((number) => (
                         <button key={number} onClick={() => handleNumberSelect(number)} className={styles.numberButton}>
                             {number}
                         </button>
