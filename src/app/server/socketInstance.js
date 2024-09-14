@@ -2,11 +2,10 @@
 // import { Server, Socket } from 'socket.io';
 import { Server } from 'socket.io';
 
-
-// Setup CORS and socket server
 export const io = new Server({
     cors: {
-        origin: process.env.CORS_ORIGIN || "http://localhost:3000", // 'http://localhost:3000' set this for development
+        // https://oldschoolgame.vercel.app 'Use in Production'
+        origin: process.env.CORS_ORIGIN || "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
@@ -28,7 +27,7 @@ io.on('connection', (socket) => {
     // User joins an existing game
     socket.on('joinGame', (gameNumber) => {
         if (gameRooms[gameNumber]) {
-            if (gameRooms[gameNumber].length == 2)
+            if (gameRooms[gameNumber].length === 2)
                 socket.emit('error', 'Game is already full');
             else {
                 socket.join(gameNumber);

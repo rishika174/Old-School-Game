@@ -4,20 +4,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev ",
+    "dev": "concurrently \"next dev\" \"npm run websocket:dev\"",
     "websocket:dev": "node src/app/server/server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "concurrently \"next start\" \"node src/app/server/server.js\"",
     "lint": "next lint"
   },
   "dependencies": {
     "next": "14.2.8",
     "react": "^18",
-    "react-canvas-confetti": "^2.0.7",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
     "socket.io": "^4.7.5",
-    "socket.io-client": "^4.7.5"
+    "socket.io-client": "^4.7.5",
+    "concurrently": "^8.2.2"
   },
   "devDependencies": {
     "@types/node": "^20",

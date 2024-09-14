@@ -141,16 +141,27 @@
 }
 
 
+.winMessage{
+    color: var(--light-red);
+    margin-top: 1rem;
+    filter: drop-shadow(0 0 0.40rem #A0A5AC);
+}
+
+
 .resetButtonContainer{
+    position: absolute;
+    backdrop-filter: blur(2px);
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .resetButton{
-    background-color: var(--light-green);
-
+    background-color: var(--light-yellow);
     font-size: 16px;
-    color: white;
+    color: var(--black);
     border: none;
     padding: 8px 20px;
     border-radius: 5px;
@@ -160,6 +171,7 @@
 
 .resetButton:hover{
     background-color: var(--green);
+    color: white;
 }
 
 
