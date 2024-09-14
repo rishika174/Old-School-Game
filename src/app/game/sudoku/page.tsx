@@ -60,6 +60,9 @@ export default function Home() {
             }
         }
         stopTimer(); // Stop the timer if the solution is correct
+
+      
+      
         setMessage("Congratulations! Your solution is correct. 🥰");
         return true;
     }, [sudoku, sudokuAns, stopTimer]);
@@ -185,3 +188,5 @@ export default function Home() {
         </>
     );
 }
+
+

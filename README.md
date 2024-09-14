@@ -1,10 +1,10 @@
-# Time Pass
+# Old School Game
 
-Welcome to the **Time Pass** project! This is a simple Tic-Tac-Toe game built with Next.js, featuring real-time multiplayer functionality using Socket.io.
+Welcome to the **Old School Game** project! This is a simple Tic-Tac-Toe game built with Next.js, featuring real-time multiplayer functionality using Socket.io.
 
 ## Project Overview
 
-**Time Pass** is a fun Tic-Tac-Toe game where you can create or join a game room and play with other users in real-time. The project consists of a frontend built with Next.js and a backend powered by Nest.js with Socket.io for real-time communication.
+**Old School Game** is a fun Tic-Tac-Toe game where you can create or join a game room and play with other users in real-time. The project consists of a frontend built with Next.js and a backend powered by Nest.js with Socket.io for real-time communication.
 
 
 ### Project Structure
