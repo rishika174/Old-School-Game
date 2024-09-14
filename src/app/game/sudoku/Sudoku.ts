@@ -44,7 +44,7 @@ export const generateFullSudoku = () => {
 
 // Function to remove numbers to create a Sudoku puzzle with a specific difficulty
 export const removeNumbers = (grid: number[][], difficulty: "easy" | "medium" | "hard") => {
-    let attempts = difficulty === "easy" ? 10 : difficulty === "medium" ? 40 : 50;
+    let attempts = difficulty === "easy" ? 20 : difficulty === "medium" ? 35 : 50;
 
     while (attempts > 0) {
         const row = Math.floor(Math.random() * 9);
