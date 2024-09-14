@@ -4,10 +4,7 @@ import {useState, useEffect} from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import io from 'socket.io-client';
 import styles from "./page.module.css";
-// import Confetti from "../../../components/ConfettiEffect.jsx";
 
-
-// https://timepassgame.vercel.app
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001'); // 'http://localhost:3001' set this for development
 
 const Game = () => {
@@ -21,36 +18,9 @@ const Game = () => {
     const [mySymbol, setMySymbol] = useState(''); // Player's symbol ('X' or 'O')
     const [hasStarted, setHasStarted] = useState(false); // Flag to check if the game has started
 
-
     const [optionSelected, setOptionSelected] = useState(false);
     const [optionNewGame, setOptionNewGame] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
-
-    // const [isConfettiEffectVisible, setIsConfettiEffectVisible] = useState(false);
-
-
-    // const [seconds, setSeconds] = useState(10);  // Initial 10 seconds for each turn
-    // const [startTimer, setStartTimer] = useState(false);
-
-    // Timer logic: Decrease the seconds every second and switch turns if timer runs out
-    // useEffect(() => {
-    //     if (startTimer && hasStarted) {
-    //         if (seconds > 0) {
-    //             const intervalId = setInterval(() => {
-    //                 setSeconds(prevSeconds => prevSeconds - 1);
-    //             }, 1000);
-    //
-    //             return () => clearInterval(intervalId);  // Cleanup interval on unmount
-    //         } else {
-    //             // Switch player turn when timer runs out
-    //             setIsXNext(!isXNext); // Switch the turn to the other player
-    //             setSeconds(10); // Reset the timer
-    //         }
-    //     }
-    // }, [seconds, startTimer, hasStarted, isXNext]);
-
-
-
 
     useEffect(() => {
         let statusTimer;
@@ -120,12 +90,12 @@ const Game = () => {
         }
         if (board[index] || calculateWinner(board)) return;
 
-        if (isXNext && mySymbol != 'X') {
+        if (isXNext && mySymbol !== 'X') {
             setStatus('Please wait for opponent\'s move');
             return;
         }
 
-        if (isXNext == false && mySymbol == 'X') {
+        if (isXNext === false && mySymbol === 'X') {
             setStatus('Please wait for opponent\'s move');
             return;
         }
@@ -134,7 +104,6 @@ const Game = () => {
 
         socket.emit('move', {gameNumber: currentGame, index, symbol});
     };
-
 
 
     const reset = (isUserInitiated = true) => {
@@ -159,8 +128,6 @@ const Game = () => {
     const winner = calculateWinner(board);
     const isBoardFull = board.every(cell => cell !== null);
     const gameStatus = winner ? `${winner} is winner 🎉` : isBoardFull ? 'Match Tie 🙁' : `You are ${mySymbol} `;
-
-
 
 
     return (
@@ -224,52 +191,45 @@ const Game = () => {
                     <p>Current Turn: {isXNext ? 'X' : 'O'}</p>
 
                 </div>
-                }
-
-
-                    {/*{*/}
-                    {/*    gameStarted && (*/}
-                    {/*        <p className={styles.timer}>Time Remaining: {seconds} seconds</p>*/}
-                    {/*    )*/}
-                    {/*}*/}
-
-
-                    <div>
-                        <p className={styles.statusError}>{status}</p>
-                    </div>
-
-                    <div className={styles.gridContainer}>
-                        {board.map((cell, index) => (
-                            <button key={index} className={styles.gridButton} onClick={() => handleClick(index)}>
-                                {cell}
-                            </button>
-                        ))}
-                    </div>
+            }
 
 
 
+            <div>
+                <p className={styles.statusError}>{status}</p>
+            </div>
 
-                    {(gameStatus.includes("winner") || gameStatus.includes('Tie')) && (
-                        <div className={styles.resetButtonContainer}>
-                            <button
-                                type="button"
-                                className={styles.resetButton}
-                                onClick={() => reset(true)}>
-                                Reset
-                            </button>
-                        </div>
+            <div className={styles.gridContainer}>
+                {board.map((cell, index) => (
+                    <button key={index} className={styles.gridButton} onClick={() => handleClick(index)}>
+                        {cell}
+                    </button>
+                ))}
+            </div>
+
+
+            {/* Show reset button and result message if the game is over */}
+            {(gameStatus.includes("winner") || gameStatus.includes('Tie')) && (
+                <div className={styles.resetButtonContainer}>
+                    {gameStatus.includes('Tie') ? (
+                        <h2 className={styles.winMessage}>It&apos;s a draw!</h2>
+                    ) : (
+                        <h2 className={styles.winMessage}>
+                            {winner === mySymbol ? "You win! 🎉" : "You lose the game 😞"}
+                        </h2>
                     )}
+                    {/* Button to reset the game */}
+                    <button type="button" className={styles.resetButton} onClick={() => reset(true)}>Reset</button>
+                </div>
+            )}
 
 
-                    {/*{isConfettiEffectVisible ? (<Confetti/>) : (' ')}*/}
 
-                    {/*<Confetti/>*/}
+        </>
+    );
+};
 
-                </>
-                );
-            };
-
-            const calculateWinner = (board) => {
+const calculateWinner = (board) => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],

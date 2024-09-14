@@ -65,17 +65,16 @@
 /*    margin-top: 1rem;*/
 /*}*/
 
-.winMessage{
-    color: var(--light-red);
-    margin-top: 1rem;
-
-    filter: drop-shadow(0 0 0.40rem #A0A5AC);
-
-}
 .winningCell {
     background-color: yellow;
     color: red;
     font-weight: bold;
+}
+
+.winMessage{
+    color: var(--light-red);
+    margin-top: 1rem;
+    filter: drop-shadow(0 0 0.40rem #A0A5AC);
 }
 
 
@@ -91,7 +90,6 @@
 }
 .resetButton{
     background-color: var(--light-yellow);
-
     font-size: 16px;
     color: var(--black);
     border: none;
@@ -105,6 +103,7 @@
     background-color: var(--green);
     color: white;
 }
+
 
 @media (max-width: 375px) {
     .boardContainer{
