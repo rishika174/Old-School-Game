@@ -5,7 +5,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import io from 'socket.io-client';
 import styles from "./page.module.css";
 
-const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001'); // 'http://localhost:3001' set this for development
+// https://oldschoolgame.vercel.app use in production
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001');
 
 const Game = () => {
 
