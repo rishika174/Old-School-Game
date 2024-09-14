@@ -2,8 +2,6 @@
 // import { Server, Socket } from 'socket.io';
 import { Server } from 'socket.io';
 
-
-// Setup CORS and socket server
 export const io = new Server({
     cors: {
         // https://oldschoolgame.vercel.app 'Use in Production'
