@@ -20,12 +20,12 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Old School Game",
-  description: "Unlock Your Mind's Potential",
+  description: "Step back in time with Old School Game, where classic games meet modern-day brain training! Sharpen your mind and have fun with nostalgic games, all designed to boost your cognitive power and keep your brain in top shape.l",
   openGraph:{
     type: "website",
     url: "https://oldschoolgame.vercel.app/",
     title: "Old School Game",
-    description: "Unlock Your Mind's Potential",
+    description: "Step back in time with Old School Game, where classic games meet modern-day brain training! Sharpen your mind and have fun with nostalgic games, all designed to boost your cognitive power and keep your brain in top shape.",
     siteName: "Old School Game",
     images: [{   url: "/oldschoolgame.webp",   }],
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "https://oldschoolgame.vercel.app/",
     creator: "Old School Game",
-    description:"Unlock Your Mind's Potential",
+    description:"Step back in time with Old School Game, where classic games meet modern-day brain training! Sharpen your mind and have fun with nostalgic games, all designed to boost your cognitive power and keep your brain in top shape.",
     images: "/oldschoolgame.webp"
   }
 
