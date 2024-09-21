@@ -53,9 +53,12 @@ export default function RootLayout( {
 
     {/*<StrictMode>*/}
     <main>
+
+
       <Navbar/>
 
       {children}
+      <div className="paperOverlay"></div>
 
       <Footer/>
     </main>
