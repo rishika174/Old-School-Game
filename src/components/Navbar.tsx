@@ -10,7 +10,7 @@ const Navbar = () => {
                     <Link href="/" className={styles["heading"]}>
                         <h3 className={styles["title"]}>OLD SCHOOL GAME</h3>
                     </Link>
-                    <Link href="/" className={styles.link}>LOGIN</Link>
+                    <Link href="https://github.com/ajaynegi45/Old-School-Game" className={styles.link}>Github</Link>
                 </nav>
             </div>
             <div className={styles["fade-navbar-effect"]}></div>
