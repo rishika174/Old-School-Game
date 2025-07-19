@@ -1,5 +1,5 @@
 .boardContainer{
-    width: 100vw;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -81,13 +81,15 @@
 .resetButtonContainer{
     position: absolute;
     backdrop-filter: blur(1.5px);
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
     height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
+
 .resetButton{
     background-color: var(--light-yellow);
     font-size: 16px;
@@ -185,4 +187,27 @@
 
 .youtubeLink:hover {
     background-color: var(--light-yellow);
+}
+
+
+/* Reponsive Typography  */
+
+@media (min-width: 768px) {
+    .boardContainer > h1,
+    .turnStatus {
+        font-size: 24px;
+    }
+
+    .gridButton {
+        font-size: 2rem;
+    }
+
+    .workingContainer {
+        padding: 0 2rem;
+    }
+
+    .workingContainer h2,
+    .workingContainer h3 {
+        font-size: 1.5rem;
+    }
 }
