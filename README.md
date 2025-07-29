@@ -4,7 +4,6 @@
 
 Whether you're reliving childhood nostalgia or seeking a mental workout, these games offer a perfect blend of entertainment and brain training.
 
-</br>
 
 ## 🎯 Project Goals
 
@@ -12,7 +11,6 @@ Whether you're reliving childhood nostalgia or seeking a mental workout, these g
 * Promote **mental fitness** through engaging gameplay
 * Encourage open-source contributions for **educational and cognitive benefits**
 
-</br>
 
 ## 🎮 Games Included
 
@@ -24,7 +22,6 @@ Whether you're reliving childhood nostalgia or seeking a mental workout, these g
 
 > ✅ More games coming soon that focus on logic, memory, attention, and problem-solving!
 
-</br>
 
 ## 🙌 Contributing
 
@@ -47,26 +44,30 @@ You can contribute by **adding games** that are specifically designed to:
 
 Let’s build something that actively strengthens the brain — one game at a time.
 
-</br>
 
 ## 🧩 Why It Matters
 
-Studies have shown that playing logic-based and memory-enhancing games regularly can:
+In an age of distractions and short attention spans, it’s more important than ever to engage the brain with activities that promote deep, focused thinking.
 
-* Increase **mental agility**
-* Strengthen **short-term and working memory**
-* Improve **problem-solving and reasoning skills**
+Regularly playing thoughtfully designed games can:
 
-Let’s build something that’s fun, nostalgic, and good for the brain!
+* Boost **mental agility** and **neural flexibility**
+* Strengthen **short-term, working, and long-term memory**
+* Sharpen **logical reasoning** and **strategic thinking**
+* Improve **concentration**, **patience**, and **emotional regulation**
+* Support **brain plasticity** and overall **mental well-being**
 
-</br>
+> This project isn't just about games — it's about helping minds grow stronger, more resilient, and more attentive through play.
+
 
 ## 🚀 Get Started
 
 Clone the repo, play the games, or add your own brain-boosting game to the library.
 Let’s grow this open-source collection together! 🌱
 
-</br>
+Read [contributing.md](https://github.com/ajaynegi45/Old-School-Game/blob/main/contributing.md) file carefully.
+
+Remember to **star the repo 🌟** to help us grow, and follow [@ajaynegi45](https://github.com/ajaynegi45) to stay in the loop and increase the visibility of your contributions!"
 
 ## 💬 Stay Connected
 
