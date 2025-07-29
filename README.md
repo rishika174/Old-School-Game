@@ -4,13 +4,11 @@
 
 Whether you're reliving childhood nostalgia or seeking a mental workout, these games offer a perfect blend of entertainment and brain training.
 
-
 ## 🎯 Project Goals
 
 * Create a library of **classic brain-training games**
 * Promote **mental fitness** through engaging gameplay
 * Encourage open-source contributions for **educational and cognitive benefits**
-
 
 ## 🎮 Games Included
 
@@ -21,7 +19,6 @@ Whether you're reliving childhood nostalgia or seeking a mental workout, these g
    *Challenge your number sense and memory with this popular puzzle. Perfect for enhancing focus and pattern recognition.*
 
 > ✅ More games coming soon that focus on logic, memory, attention, and problem-solving!
-
 
 ## 🙌 Contributing
 
@@ -44,7 +41,6 @@ You can contribute by **adding games** that are specifically designed to:
 
 Let’s build something that actively strengthens the brain — one game at a time.
 
-
 ## 🧩 Why It Matters
 
 In an age of distractions and short attention spans, it’s more important than ever to engage the brain with activities that promote deep, focused thinking.
@@ -58,7 +54,6 @@ Regularly playing thoughtfully designed games can:
 * Support **brain plasticity** and overall **mental well-being**
 
 > This project isn't just about games — it's about helping minds grow stronger, more resilient, and more attentive through play.
-
 
 ## 🚀 Get Started
 
