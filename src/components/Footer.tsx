@@ -36,7 +36,8 @@ export default function Footer() {
                     <div className={styles["footer-right-link-container"]} >
                         <p>Play Game</p>
                         <Link href={"https://oldschoolgame.vercel.app/game/tic-tac-toe/single-player"}>Tic Tac Toe</Link>
-                        <Link href={"http://localhost:3000/game/sudoku"}>Sudoku</Link>
+                        <Link href={"/game/sudoku"}>Sudoku</Link> 
+                        {/* The link above in local instead it should be relative  */}
                         <Link href={"https://ukculture.netlify.app/contact"}>Contact us</Link>
                     </div>
                     <div className={styles["footer-right-link-container"]} >
