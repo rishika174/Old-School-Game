@@ -1,4 +1,4 @@
-# 🧠 Old School Game – Boost Your Brain with Classic Fun! 🎮
+# 🧠 Old School Game – Boost Your Brain with Classic Fun!
 
 **Old School Game** is a curated collection of timeless, logic-based games designed to **enhance cognitive abilities**, **improve memory**, and **sharpen problem-solving skills** — all while having fun!
 
