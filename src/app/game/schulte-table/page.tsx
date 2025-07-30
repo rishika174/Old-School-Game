@@ -18,6 +18,7 @@ const SchulteTable = () => {
   const [elapsedTime, setElapsedTime] = useState(0)
   const [highlighted, setHighlighted] = useState<number | null>(null)
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null)
+  const [showPopup, setShowPopup] = useState(false)
 
   const startNewGame = () => {
     setNumbers(generateShuffledNumbers())
@@ -25,6 +26,7 @@ const SchulteTable = () => {
     setStartTime(null)
     setElapsedTime(0)
     setHighlighted(null)
+    setShowPopup(false)
     if (intervalId) clearInterval(intervalId)
   }
 
@@ -40,9 +42,7 @@ const SchulteTable = () => {
       setIntervalId(id)
       return () => clearInterval(id)
     }
-  }, [startTime,nextNumber])
-
-  
+  }, [startTime, nextNumber])
 
   const handleClick = (num: number) => {
     if (num === nextNumber) {
@@ -52,8 +52,9 @@ const SchulteTable = () => {
         setStartTime(Date.now())
       }
 
-      if (num === 25 && intervalId) {
-        clearInterval(intervalId)
+      if (num === 25) {
+        if (intervalId) clearInterval(intervalId)
+        setTimeout(() => setShowPopup(true), 200)
       }
 
       setTimeout(() => setHighlighted(null), 200)
@@ -63,8 +64,6 @@ const SchulteTable = () => {
 
   return (
     <div className={styles.container}>
-      
-
       {/* Game Status and Grid */}
       <div className={styles.header}>
         {nextNumber <= 25 ? (
@@ -75,12 +74,15 @@ const SchulteTable = () => {
         ) : (
           <span className={styles.status}>🎉 Completed in {elapsedTime.toFixed(1)}s!</span>
         )}
-        <button type='button' className={styles.restartBtn} onClick={startNewGame}>Restart</button>
+        <button type="button" className={styles.restartBtn} onClick={startNewGame}>
+          Restart
+        </button>
       </div>
 
       <div className={styles.grid}>
         {numbers.map((num) => (
-          <button type='button'
+          <button
+            type="button"
             key={num}
             className={`${styles.cell} ${highlighted === num ? styles.highlight : ''}`}
             onClick={() => handleClick(num)}
@@ -90,41 +92,63 @@ const SchulteTable = () => {
         ))}
       </div>
 
+      {/* Popup when game ends */}
+      {showPopup && (
+        <div className={styles.popupOverlay}>
+          <div className={styles.popup}>
+            <h2>🎉 Game Completed!</h2>
+            <p>Your time: <strong>{elapsedTime.toFixed(1)}s</strong></p>
+            <button className={styles.restartBtn} onClick={startNewGame}>
+              Restart Game
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* How to Play Section */}
-        <div className={styles.instructions}>
+      <div className={styles.instructions}>
         <h2>How Does the Game Work?</h2>
         <p>
-            You need to click numbers from <strong>1 to 25</strong> in ascending order as fast as possible.
-            The timer starts when you click 1 and stops when you click 25.
+          You need to click numbers from <strong>1 to 25</strong> in ascending order as fast as possible.
+          The timer starts when you click 1 and stops when you click 25.
         </p>
 
         <h3>Shuffling Algorithm</h3>
         <p>
-            The numbers are shuffled using the <strong>Fisher-Yates</strong> algorithm, ensuring each arrangement is random.
+          The numbers are shuffled using the <strong>Fisher-Yates</strong> algorithm, ensuring each arrangement is random.
         </p>
 
-
-        <h3>Timing Logic</h3>
+        <h3>The Science Behind the Fun</h3>
+        <p>
+          Playing the Schulte Table game regularly offers several cognitive benefits:
+        </p>
         <ul>
-            <li>A 0.1s interval continuously updates the timer after clicking 1.</li>
-            <li>Timer stops automatically after 25 is clicked.</li>
+          <li><strong>Improves Visual Perception:</strong> Helps train your eyes to scan and recognize numbers more efficiently.</li>
+          <li><strong>Boosts Attention & Focus:</strong> Encourages sustained concentration as you look for the next number quickly.</li>
+          <li><strong>Enhances Peripheral Vision:</strong> Requires you to locate numbers outside your central focus area.</li>
+          <li><strong>Trains Processing Speed:</strong> Challenges your brain to process and react to information faster.</li>
+          <li><strong>Supports Memory & Recall:</strong> Especially helpful in improving short-term visual memory patterns.</li>
         </ul>
 
         <h3>Visual Feedback</h3>
         <ul>
-            <li>Correctly clicked numbers briefly highlight green.</li>
-            <li>Incorrect numbers give no response.</li>
-            <li>You can see the next number to be clicked at the top of the table.</li>
+          <li>Correctly clicked numbers briefly highlight green.</li>
+          <li>Incorrect numbers give no response.</li>
+          <li>You can see the next number to be clicked at the top of the table.</li>
         </ul>
 
         <button
-            className={styles.learnBtn}
-            onClick={() => window.open('https://www.geeksforgeeks.org/dsa/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/', '_blank')}
+          className={styles.learnBtn}
+          onClick={() =>
+            window.open(
+              'https://www.geeksforgeeks.org/dsa/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/',
+              '_blank','noopener'
+            )
+          }
         >
-            Learn more about it
+          Learn more about it
         </button>
-        </div>
-
+      </div>
     </div>
   )
 }
