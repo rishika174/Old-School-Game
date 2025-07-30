@@ -55,14 +55,18 @@ Regularly playing thoughtfully designed games can:
 
 > This project isn't just about games — it's about helping minds grow stronger, more resilient, and more attentive through play.
 
+
 ## 🚀 Get Started
 
 Clone the repo, play the games, or add your own brain-boosting game to the library.
 Let’s grow this open-source collection together! 🌱
 
-Read [contributing.md](https://github.com/ajaynegi45/Old-School-Game/blob/main/contributing.md) file carefully.
+📖 Read the [contributing guide](https://github.com/ajaynegi45/Old-School-Game/blob/main/contributing.md) carefully before getting started.
 
-Remember to **star the repo 🌟** to help us grow, and follow [@ajaynegi45](https://github.com/ajaynegi45) to stay in the loop and increase the visibility of your contributions!"
+🌟 **[Star the repo](https://github.com/ajaynegi45/Old-School-Game)** to support the project and boost its visibility.  
+👤 **[Follow @ajaynegi45](https://github.com/ajaynegi45)** to stay in the loop and get behind-the-scenes updates.
+
+📬 **Subscribe** to the [CodiesCoder Newsletter](https://codiescoder.substack.com/) — Each month, we dive deep into a single topic in software engineering, breaking it down in a way that’s easy to grasp and fun to explore. Whether you're just starting out or already a pro, you'll always walk away with something new to think about.
 
 ## 💬 Stay Connected
 
