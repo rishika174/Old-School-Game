@@ -32,7 +32,7 @@ const SchulteTable = () => {
 
   useEffect(() => {
     startNewGame()
-  }, [])
+  }, [startNewGame])
 
   useEffect(() => {
     if (startTime !== null && nextNumber <= 25) {
@@ -142,7 +142,7 @@ const SchulteTable = () => {
           onClick={() =>
             window.open(
               'https://www.geeksforgeeks.org/dsa/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/',
-              '_blank','noopener'
+              "_blank", "noopener,noreferrer" 
             )
           }
         >

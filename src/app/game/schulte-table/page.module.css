@@ -1,12 +1,25 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  width: 100%;
+  max-width: 90vmin; /* Makes it scale proportionally on all screens */
+  margin: 0 auto;
+}
+
 .cell {
-  background-color: #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
+  background-color: #e0e0e0;
+  border: 1px solid #bbb;
   font-size: 20px;
+  text-align: center;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+  font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  border-radius: 0;
 }
+
 
 .cell:hover,.cell:focus {
   background-color: #bbb;
@@ -15,18 +28,6 @@
 
 .highlight {
   background-color: #8fbc8f !important;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr)); /* Fixed 5 columns */
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .container {
@@ -121,7 +122,7 @@
 @media (max-width: 600px) {
   .grid {
     max-width: 90vw;
-    gap: 10px;
+    gap: 2px;
   }
 
   .cell {
@@ -165,7 +166,7 @@
 @media (max-width: 400px) {
   .grid {
     max-width: 95vw;
-    gap: 6px;
+    gap: 2px;
   }
 
   .cell {
