@@ -18,16 +18,20 @@ const SchulteTable = () => {
   const [elapsedTime, setElapsedTime] = useState(0)
   const [highlighted, setHighlighted] = useState<number | null>(null)
   const [showPopup, setShowPopup] = useState(false)
+
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const startNewGame = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+
     setNumbers(generateShuffledNumbers())
     setNextNumber(1)
     setStartTime(null)
     setElapsedTime(0)
     setHighlighted(null)
     setShowPopup(false)
-    if (intervalRef.current) clearInterval(intervalRef.current)
   }, [])
 
   useEffect(() => {
@@ -40,11 +44,19 @@ const SchulteTable = () => {
       intervalRef.current = setInterval(() => {
         setElapsedTime(Math.floor((Date.now() - startTime) / 100) / 10)
       }, 100)
-      return () => {
-        if (intervalRef.current) clearInterval(intervalRef.current)
-      }
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
     }
   }, [startTime, nextNumber])
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [])
 
   const handleClick = (num: number) => {
     if (num === nextNumber) {
@@ -56,10 +68,10 @@ const SchulteTable = () => {
 
       if (num === 25) {
         if (intervalRef.current) clearInterval(intervalRef.current)
-        setTimeout(() => setShowPopup(true), 200)
+        timeoutRef.current = setTimeout(() => setShowPopup(true), 200)
       }
 
-      setTimeout(() => setHighlighted(null), 200)
+      timeoutRef.current = setTimeout(() => setHighlighted(null), 200)
       setNextNumber(num + 1)
     }
   }
