@@ -1,39 +1,43 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 2px;
+  gap: 1px;
   width: 100%;
-  max-width: 90vmin; /* Makes it scale proportionally on all screens */
+  max-width: min(90vmin, 500px);
   margin: 0 auto;
+  border: 2px solid #999;
+  background-color: #999;
 }
 
 .cell {
-  background-color: #e0e0e0;
-  border: 1px solid #bbb;
+  background-color: #fff;
+  border: none;
   font-size: 20px;
   text-align: center;
-  padding: 0;
-  aspect-ratio: 1 / 1;
+  padding: 20px;
+  height: auto;
+  width: auto;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
-  border-radius: 0;
+  transition: background-color 0.2s, transform 0.1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-.cell:hover,.cell:focus {
-  background-color: #bbb;
-  outline: 2px solid #333;
+.cell:hover,
+.cell:focus {
+  background-color: #e0e0e0;
+  outline: 1px solid #555;
 }
 
-.highlight {
-  background-color: #8fbc8f !important;
+.cell.highlight {
+  background-color: #8fbc8f;
 }
 
 .container {
   text-align: center;
-  padding: 20px;
-  min-height: 100vh;
+  padding: 10px;
   background: url('/grid-bg.svg') repeat;
   font-family: sans-serif;
 }
@@ -67,11 +71,10 @@
   padding: 20px;
   border-radius: 10px;
   max-width: 700px;
-  margin: 0 auto auto auto;
+  margin: 40px auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-family: sans-serif;
   text-align: left;
-  margin-top: 40px;
 }
 
 .instructions h2 {
@@ -122,11 +125,9 @@
 @media (max-width: 600px) {
   .grid {
     max-width: 90vw;
-    gap: 2px;
   }
 
   .cell {
-    padding: 12px;
     font-size: 16px;
   }
 
@@ -141,7 +142,6 @@
 
   .instructions {
     padding: 16px;
-    font-size: 14px;
   }
 
   .instructions h2 {
@@ -166,11 +166,9 @@
 @media (max-width: 400px) {
   .grid {
     max-width: 95vw;
-    gap: 2px;
   }
 
   .cell {
-    padding: 8px;
     font-size: 14px;
   }
 
@@ -195,10 +193,7 @@
 
 .popupOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;

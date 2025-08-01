@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './page.module.css'
 
 const generateShuffledNumbers = (): number[] => {
@@ -17,18 +17,18 @@ const SchulteTable = () => {
   const [startTime, setStartTime] = useState<number | null>(null)
   const [elapsedTime, setElapsedTime] = useState(0)
   const [highlighted, setHighlighted] = useState<number | null>(null)
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null)
   const [showPopup, setShowPopup] = useState(false)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
-  const startNewGame = () => {
+  const startNewGame = useCallback(() => {
     setNumbers(generateShuffledNumbers())
     setNextNumber(1)
     setStartTime(null)
     setElapsedTime(0)
     setHighlighted(null)
     setShowPopup(false)
-    if (intervalId) clearInterval(intervalId)
-  }
+    if (intervalRef.current) clearInterval(intervalRef.current)
+  }, [])
 
   useEffect(() => {
     startNewGame()
@@ -36,11 +36,13 @@ const SchulteTable = () => {
 
   useEffect(() => {
     if (startTime !== null && nextNumber <= 25) {
-      const id = setInterval(() => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+      intervalRef.current = setInterval(() => {
         setElapsedTime(Math.floor((Date.now() - startTime) / 100) / 10)
       }, 100)
-      setIntervalId(id)
-      return () => clearInterval(id)
+      return () => {
+        if (intervalRef.current) clearInterval(intervalRef.current)
+      }
     }
   }, [startTime, nextNumber])
 
@@ -53,7 +55,7 @@ const SchulteTable = () => {
       }
 
       if (num === 25) {
-        if (intervalId) clearInterval(intervalId)
+        if (intervalRef.current) clearInterval(intervalRef.current)
         setTimeout(() => setShowPopup(true), 200)
       }
 
@@ -64,7 +66,6 @@ const SchulteTable = () => {
 
   return (
     <div className={styles.container}>
-      {/* Game Status and Grid */}
       <div className={styles.header}>
         {nextNumber <= 25 ? (
           <>
@@ -86,18 +87,20 @@ const SchulteTable = () => {
             key={num}
             className={`${styles.cell} ${highlighted === num ? styles.highlight : ''}`}
             onClick={() => handleClick(num)}
+            aria-label={`Number ${num}`}
           >
             {num}
           </button>
         ))}
       </div>
 
-      {/* Popup when game ends */}
       {showPopup && (
         <div className={styles.popupOverlay}>
           <div className={styles.popup}>
             <h2>🎉 Game Completed!</h2>
-            <p>Your time: <strong>{elapsedTime.toFixed(1)}s</strong></p>
+            <p>
+              Your time: <strong>{elapsedTime.toFixed(1)}s</strong>
+            </p>
             <button className={styles.restartBtn} onClick={startNewGame}>
               Restart Game
             </button>
@@ -105,7 +108,6 @@ const SchulteTable = () => {
         </div>
       )}
 
-      {/* How to Play Section */}
       <div className={styles.instructions}>
         <h2>How Does the Game Work?</h2>
         <p>
@@ -119,9 +121,7 @@ const SchulteTable = () => {
         </p>
 
         <h3>The Science Behind the Fun</h3>
-        <p>
-          Playing the Schulte Table game regularly offers several cognitive benefits:
-        </p>
+        <p>Playing the Schulte Table game regularly offers several cognitive benefits:</p>
         <ul>
           <li><strong>Improves Visual Perception:</strong> Helps train your eyes to scan and recognize numbers more efficiently.</li>
           <li><strong>Boosts Attention & Focus:</strong> Encourages sustained concentration as you look for the next number quickly.</li>
@@ -142,7 +142,8 @@ const SchulteTable = () => {
           onClick={() =>
             window.open(
               'https://www.geeksforgeeks.org/dsa/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/',
-              "_blank", "noopener,noreferrer" 
+              '_blank',
+              'noopener,noreferrer'
             )
           }
         >
