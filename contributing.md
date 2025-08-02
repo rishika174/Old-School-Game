@@ -27,16 +27,13 @@ Before you begin, please ensure your game meets ***all*** of these requirements:
 
 Your game **must be fully responsive**, working from **320px (smallest phones)** to large desktops.
 
-### 🧪 How to test responsiveness:
+### 🧪 How to Test Responsiveness on Your Phone:
 
-1. Connect your **laptop and phone to the same Wi-Fi or hotspot**.
-2. Run the development server:
+1. Make sure **both your laptop and phone are connected to the same Wi-Fi network or mobile hotspot**.
 
-   ```bash
-   npm run host
-   ```
-3. You’ll see an IP like `192.168.0.xxx:3000` in the terminal.
-4. Open that IP in your phone browser to test responsiveness live during development.
+2. Run the development server with: `npm run dev`
+3. The terminal will display two URLs: one with `localhost` and one with your local network IP address. Copy the **network IP address** (it usually looks like `http://192.168.x.x:3000`).
+4. On your phone’s browser, enter this network IP address URL to access your development site live.
 
 ---
 
