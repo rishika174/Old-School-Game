@@ -1,0 +1,75 @@
+name: 🧠 New Game Proposal
+description: Suggest a new brain-training game to be added to the collection.
+title: "[NEW GAME] <Game Name>"
+labels: ["type: game proposal", "status: awaiting triage"]
+
+body:
+  - type: checkboxes
+    id: duplicates
+    attributes:
+      label: 🔍 Is this game already proposed?
+      description: Check if someone has already suggested this game.
+      options:
+        - label: I have searched both "open" and "closed" issues and this is not a duplicate.
+          required: true
+
+  - type: textarea
+    id: game_summary
+    attributes:
+      label: 🎮 Game Summary
+      description: Briefly describe the game idea, its core mechanics, and how it will be played.
+      placeholder: "For example: A 4x4 memory match game where players flip cards to find pairs and train their short-term memory."
+    validations:
+      required: true
+
+  - type: textarea
+    id: brain_benefit
+    attributes:
+      label: 🧠 Brain Development Impact
+      description: Explain how this game improves cognitive function. Be specific — e.g., logic, memory, attention span, strategic thinking, etc.
+      placeholder: "For example: This game stimulates working memory and concentration by requiring the player to hold and recall card positions. It strengthens the hippocampus and frontal lobe functions."
+    validations:
+      required: true
+
+  - type: textarea
+    id: research_reference
+    attributes:
+      label: 📚 Scientific Backing
+      description: Share links to any relevant scientific studies or journals that support your claim.
+      placeholder: "For example: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8573707/"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution_md
+    attributes:
+      label: 📄 Have You Read `CONTRIBUTING.md`?
+      description: Before submitting, make sure your game aligns with the guidelines.
+      options:
+        - label: I have read and understood the [CONTRIBUTING.md](https://github.com/ajaynegi45/Old-School-Game/blob/main/CONTRIBUTING.md) and agree to follow the project’s game standards.
+          required: true
+
+  - type: dropdown
+    id: work_on_issue
+    attributes:
+      label: 👨‍💻 Would you like to work on this game yourself?
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation_plan
+    attributes:
+      label: 🛠️ Implementation Plan (if you're building it)
+      description: Outline how you plan to build the game, libraries/tools you'll use, and how you'll ensure responsiveness.
+      placeholder: "I will use JavaScript and CSS Grid for layout. Game will be responsive from 320px to large screens. Will test with npm run host across devices."
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ✅ Thanks for suggesting a new game to the **Old School Game** library!  
+        Your thoughtful submission helps us create a rich, research-backed experience that strengthens minds through meaningful play.

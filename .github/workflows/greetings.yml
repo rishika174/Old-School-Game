@@ -23,36 +23,37 @@ jobs:
             const repoLink = "https://github.com/ajaynegi45/Old-School-Game";
             const newsletterLink = "https://codiescoder.substack.com/";
 
-            let message = `
-👋 **Hello @${user}!**
-
-Thanks for contributing to **[Old-School-Game](${repoLink})** – a curated collection of classic, brain-training games that boost memory, focus, creativity, and long-term brain health 🎯🧠.
-
-In today's world full of short-form distractions, this project helps rebuild deep focus and mental endurance through thoughtful gameplay.
-
----
-
-### ✅ Important Things To Do:
-
-- 🌟 Don’t forget to **[⭐ Star the repo](https://github.com/ajaynegi45/Old-School-Game)** and follow [@ajaynegi45](https://github.com/ajaynegi45) for updates, ideas, and dev insights.
-- 📬 **Stay inspired!** Sign up for the monthly [CodiesCoder Newsletter](${newsletterLink}) – we explore one key software engineering topic each month, beginner-friendly and fun to read!
-
-`;
+            let message = [
+              `👋 **Hello @${user}!**`,
+              ``,
+              `Thanks for contributing to **[Old-School-Game](${repoLink})** – a curated collection of classic, brain-training games that boost memory, focus, creativity, and long-term brain health 🎯🧠.`,
+              ``,
+              `In today's world full of short-form distractions, this project helps rebuild deep focus and mental endurance through thoughtful gameplay.`,
+              ``,
+              `---`,
+              ``,
+              `### ✅ Important Things To Do:`,
+              ``,
+              `- 🌟 Don’t forget to **[⭐ Star the repo](${repoLink})** and follow [@ajaynegi45](https://github.com/ajaynegi45) for updates, ideas, and dev insights.`,
+              `- 📬 **Stay inspired!** Sign up for the monthly [CodiesCoder Newsletter](${newsletterLink}) – we explore one key software engineering topic each month, beginner-friendly and fun to read!`
+            ];
 
             if (isIssue) {
-              message += `\n📝 Thank you for raising an issue! Our team will review it shortly, so stay tuned.`;
+              message.push(``);
+              message.push(`📝 Thank you for raising an issue! Our team will review it shortly, so stay tuned.`);
               await github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: message
+                body: message.join('\n')
               });
             } else {
-              message += `\n✅ Your pull request has been submitted successfully, and a maintainer will review it soon.`;
+              message.push(``);
+              message.push(`✅ Your pull request has been submitted successfully, and a maintainer will review it soon.`);
               await github.rest.issues.createComment({
                 issue_number: context.payload.pull_request.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: message
+                body: message.join('\n')
               });
             }
