@@ -1,0 +1,178 @@
+
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+
+.status {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.restartBtn,
+.learnBtn {
+  margin-top: 0.5rem;
+  background: var(--light-yellow);
+  border: none;
+  color: var(--background);
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.restartBtn:hover,
+.learnBtn:hover {
+  background: var(--light-yellow);
+  color: var(--color-white);
+  box-shadow: 0 2px 6px var(--slate-black);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Always 5 columns */
+  grid-template-rows: repeat(5, 1fr);    /* Always 5 rows */
+  width: 90vmin;                         /* Responsive: 90% of smaller viewport dimension */
+  max-width: 400px;
+  max-height: 400px;
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--slate-black);
+}
+
+.cell {
+  font-size: clamp(1rem, 2.5vmin, 1.6rem); /* Scales with viewport */
+  font-weight: bold;
+  border: 1px solid var(--slate-black);
+  cursor: pointer;
+  color: var(--black);
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--background);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+
+.cell:focus {
+  outline: none;
+}
+
+.highlight {
+  background-color: var(--light-green);
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup {
+  background: var(--background);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px var(--mist-grey);
+  text-align: center;
+  max-width: 90%;
+  width: 300px;
+}
+
+.instructions {
+  margin-top: 2.5rem;
+  max-width: 700px;
+  text-align: left;
+  color: var(--black);
+  line-height: 1.6;
+}
+
+.instructions h2 {
+  color: var(--light-green);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.instructions h3 {
+  color: var(--black);
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.instructions p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.instructions ul {
+  list-style-type: disc;
+  color: var(--slate-black);
+  padding-left: 1.5rem;
+}
+
+.instructions li {
+  margin: 0.4rem 0;
+}
+
+/*@media screen and (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(5, minmax(55px, 1fr));
+    max-width: 400px;
+  }
+
+  .cell {
+    font-size: 1.4rem;
+  }
+
+  .status {
+    font-size: 1.4rem;
+  }
+
+  .restartBtn,
+  .learnBtn {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.4rem;
+  }
+
+  .popup {
+    width: 360px;
+  }
+
+  .instructions {
+    font-size: 1.05rem;
+  }
+
+  .instructions h2 {
+    font-size: 1.8rem;
+  }
+
+  .instructions h3 {
+    font-size: 1.3rem;
+  }
+}*/
