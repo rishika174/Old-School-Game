@@ -28,7 +28,10 @@ const SchulteTable = () => {
   }
 
   const startNewGame = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
     clearAllTimeouts()
 
     setNumbers(generateShuffledNumbers())
@@ -42,23 +45,32 @@ const SchulteTable = () => {
   useEffect(() => {
     startNewGame()
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
       clearAllTimeouts()
     }
   }, [startNewGame])
 
   useEffect(() => {
     if (startTime !== null && nextNumber <= 25) {
-      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
       intervalRef.current = setInterval(() => {
         setElapsedTime(Math.floor((Date.now() - startTime) / 100) / 10)
       }, 100)
     }
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
     }
-  }, [startTime])
+  }, [startTime, nextNumber])
 
   const handleClick = (num: number) => {
     if (num === nextNumber) {
@@ -69,10 +81,14 @@ const SchulteTable = () => {
       }
 
       if (num === 25) {
-        if (intervalRef.current) clearInterval(intervalRef.current)
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current)
+          intervalRef.current = null
+        }
         timeoutRefs.current.push(setTimeout(() => setShowPopup(true), 200))
       } else {
-      timeoutRefs.current.push(setTimeout(() => setHighlighted(null), 200))
+        clearAllTimeouts()
+        timeoutRefs.current.push(setTimeout(() => setHighlighted(null), 200))
       }
       setNextNumber(num + 1)
     }

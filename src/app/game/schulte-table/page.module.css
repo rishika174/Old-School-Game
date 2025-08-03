@@ -1,13 +1,4 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 1rem;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--background);
-  min-height: 100vh;
-  box-sizing: border-box;
-}
+
 
 .header {
   display: flex;
@@ -47,17 +38,17 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
-  gap: 0;
-  max-width: 280px;
-  width: 100%;
+  grid-template-columns: repeat(5, 1fr); /* Always 5 columns */
+  grid-template-rows: repeat(5, 1fr);    /* Always 5 rows */
+  width: 90vmin;                         /* Responsive: 90% of smaller viewport dimension */
+  max-width: 400px;
+  max-height: 400px;
+  aspect-ratio: 1 / 1;
   border: 2px solid var(--slate-black);
 }
 
 .cell {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vmin, 1.6rem); /* Scales with viewport */
   font-weight: bold;
   border: 1px solid var(--slate-black);
   cursor: pointer;
@@ -69,6 +60,19 @@
   user-select: none;
   transition: background 0.2s;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--background);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 
 .cell:focus {
   outline: none;
@@ -135,3 +139,40 @@
 .instructions li {
   margin: 0.4rem 0;
 }
+
+/*@media screen and (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(5, minmax(55px, 1fr));
+    max-width: 400px;
+  }
+
+  .cell {
+    font-size: 1.4rem;
+  }
+
+  .status {
+    font-size: 1.4rem;
+  }
+
+  .restartBtn,
+  .learnBtn {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.4rem;
+  }
+
+  .popup {
+    width: 360px;
+  }
+
+  .instructions {
+    font-size: 1.05rem;
+  }
+
+  .instructions h2 {
+    font-size: 1.8rem;
+  }
+
+  .instructions h3 {
+    font-size: 1.3rem;
+  }
+}*/
